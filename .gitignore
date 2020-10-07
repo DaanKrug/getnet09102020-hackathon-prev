@@ -1,8 +1,16 @@
+.project
 *.pem
 *.ppk
 server_deploy.sh
 *.txt
-**/ex_app/priv/static/*
+**/ex_app/priv/static/angular/*
+**/ex_app/priv/static/bootstrap/*
+**/ex_app/priv/static/fontawesome-5.11/*
+**/ex_app/priv/static/headers/*
+**/ex_app/priv/static/themes/*
+**/ex_app/priv/static/tinymce-5.3.0/*
+**/ex_app/priv/static/webfonts/*
+**/ex_app/priv/static/*.*
 **/ex_app/deps/*
 **/ex_app/compiled_getnet09102020/*
 **/ex_app/_build/*
