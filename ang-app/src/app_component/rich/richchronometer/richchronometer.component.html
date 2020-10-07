@@ -1,0 +1,30 @@
+<div class="clear" style="margin-bottom: .3em;" 
+     *ngIf="breakBefore && !breakBeforeDouble && !noRender">
+</div>
+<div class="clear" style="margin-bottom: .7em;" 
+     *ngIf="breakBeforeDouble && !noRender">
+</div>
+<div class="field"
+     style="padding: .5em;"
+     [ngStyle]="{'width': widthPerc + '%'}"
+     *ngIf="!noRender">
+	<div class="field form-control" 
+	     style="padding: 0.2em 0em 0.2em 0.7em; width: 100%; height: 2.9em; background: #e4f1f7;">
+	    <div id="{{id}}_label"
+	         class="field label" 
+	         style="width: calc(100% - 12.5em);">
+	    	<label style="display: block; font-size: 1.1em; padding-top: .15em; color: #334;" 
+	    	       *ngIf="null != label">
+		    	{{ label }}
+		    </label>
+	    </div>
+	    <div class="field form-control" 
+	         [ngStyle]="{'width': width + 'em'}"
+	         style="text-align: right !important; float: right !important; border-radius: .3em;
+	                background: #fff; color: #050c67; font-size: 1rem;">
+	    	<span id="{{id}}_timer"></span>
+	    </div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>

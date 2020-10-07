@@ -1,0 +1,16 @@
+<div *ngIf="null != this.carrousselImages && this.carrousselImages.length > 0">
+    <div id="{{id}}_selectedImageContainer"
+         style="width: 100%; height: 18em; border-radius: .15em; padding: 0;">
+   	</div>
+   	<div class="clear"></div>
+</div>
+<div *ngIf="null == this.carrousselImages || this.carrousselImages.length == 0" 
+     style="text-align: center;">
+	<div class="title" *ngIf="null != appName">
+	    {{ appName }}
+	</div>
+	<div class="title2" *ngIf="null != appDescription">
+	    {{ appDescription }} 
+	</div>
+	<div class="clear"></div>
+</div>

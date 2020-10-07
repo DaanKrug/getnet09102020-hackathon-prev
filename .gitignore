@@ -1,0 +1,10 @@
+*.pem
+*.ppk
+server_deploy.sh
+*.txt
+**/ex_app/priv/static/*
+**/ex_app/deps/*
+**/ex_app/compiled_getnet09102020/*
+**/ex_app/_build/*
+**/ang-app/e2e/*
+**/ang-app/node_modules/*

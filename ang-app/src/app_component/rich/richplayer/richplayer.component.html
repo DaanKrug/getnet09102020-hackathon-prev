@@ -1,0 +1,100 @@
+<ng-template #videoInfo>
+	<section aria-label="Informações do vídeo sendo executado"
+	 		 *ngIf="null != videoSourcesPlayListInfo && videoSourcesPlayListInfo.length > 0">
+		<table class="table" 
+		       *ngIf="videoSourcesPlayListInfo as listOfObject" 
+		       mdbTable> 
+	   		<thead class="black white-text">
+	        	<tr>
+	          		<th scope="col"
+	          		    style="width: auto;">
+	          		    Informações do Vídeo
+	          		</th>
+	        	</tr>
+	     	</thead>
+		    <tbody>
+		    	<tr mdbTableCol 
+		    	    *ngFor="let info of videoSourcesPlayListInfo;">
+		        	<td class="text noBorderRight" 
+		        	    style="font-size: .9rem;"
+		        	    [innerHtml]="info">
+		        	</td>
+		        </tr>
+		        <tr>
+		        	<td colspan="3"
+		        	    class="navigationBottom">
+		        	</td>
+		        </tr>
+		    </tbody>
+		</table>
+	</section>
+</ng-template>
+<ng-template #nextButton>
+	<div class="buttons clear"> 
+		<button class="btn btn-primary clickable" 
+		        (click)="nextVideo()"
+		        [disabled]="nexting || (null == videoSources || videoSources.length < 2)">
+	  		<i class="fas fa-medkit"></i>
+	  		<span style="margin-left: .5em; font-size: .8em;">Próximo Vídeo *</span>
+	  	</button>
+	</div>
+	<div class="clear"></div>
+</ng-template>
+<div class="clear" style="width: 100%;" *ngIf="!noRender"></div>
+<div class="field {{className}}" style="width: 100%;" *ngIf="!noRender">
+	<div style="width: 100%; margin-bottom: .5em; border-radius: .3em; background: #000;" >
+	   	<div plyr
+	   	     *ngIf="null != videoSourcesPlayList && videoSourcesPlayList.length > 0"  
+	   	     style="margin: 0 auto; border-radius: .4em;" 
+	   	     [ngStyle]="{'height': plyrHeight + 'px','width': plyrWidth + 'px'}"
+	   	     [plyrPlaysInline]="true" 
+	   	     [plyrCrossOrigin]="true"
+	   	     [plyrSources]="videoSourcesPlayList" 
+	   	     (plyrInit)="player = $event;" 
+	   	     (plyrPlay)="played($event)"
+	   	     (plyrEnded)="finished($event)">
+	   	</div>
+   	</div>
+   	<div class="clear"></div>
+   	<div style="width: calc(100% - 11em); float: left;"
+   	     *ngIf="!fitMode">
+   		<ng-template [ngTemplateOutlet]="videoInfo"></ng-template>
+   	</div>
+	<div style="width: 10.5em; float: right;"
+	     *ngIf="!fitMode">
+		<ng-template [ngTemplateOutlet]="nextButton"></ng-template>
+	</div>
+	<div class="clear"></div>
+	<div style="width: 100%;" 
+	     *ngIf="fitMode">
+		<ng-template [ngTemplateOutlet]="videoInfo"></ng-template>
+		<div class="clear"></div>
+		<ng-template [ngTemplateOutlet]="nextButton"></ng-template>
+	</div>
+	<div class="clear"></div>
+	<div class="alert-info" 
+	     style="font-size: 0.9em;"
+	     *ngIf="null != videoSources && videoSources.length > 1">
+		* Pode ser utilizado em situações de anormalidade, como por exemplo
+		se o video travou ou ficou bloqueado pelo servidor.
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear" style="width: 100%;" *ngIf="!noRender"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

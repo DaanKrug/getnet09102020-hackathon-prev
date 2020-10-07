@@ -1,0 +1,9 @@
+<div class="field commentHeader">
+     {{comment.created_at}} - Por: <strong>{{comment.name}}</strong>
+</div>
+<div class="clear"></div>
+<div class="field commentBody">
+	<div [innerHtml]="comment.content" class="field notcensured" *ngIf="comment.active"></div>
+    <div class="field censured" *ngIf="!comment.active">Comentário censurado</div>
+</div>
+<div class="clear"></div>
