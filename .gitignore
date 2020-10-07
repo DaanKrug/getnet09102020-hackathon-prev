@@ -1,4 +1,4 @@
-.project
+*.project
 *.pem
 *.ppk
 server_deploy.sh
