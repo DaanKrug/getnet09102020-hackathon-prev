@@ -1,4 +1,5 @@
 *.project
+**/.settings/*
 *.pem
 *.ppk
 server_deploy.sh
