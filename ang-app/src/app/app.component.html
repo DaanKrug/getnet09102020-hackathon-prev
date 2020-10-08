@@ -240,7 +240,7 @@
 	<ng-template [ngIf]="publicModeView">
 		<div class="position-ref">
 			<site-header [themeStyle]="themeStyle" 
-			             [render]="useSiteHeader3">
+			             [render]="useSiteHeader3 && !useSiteHeader1 && !useSiteHeader2">
 			</site-header>
 			<div class="alert-danger" *ngIf="offline">
 				Falha de Conex&atilde;o. Recarregando p&aacute;gina em {{ reloadTime }} segundos.

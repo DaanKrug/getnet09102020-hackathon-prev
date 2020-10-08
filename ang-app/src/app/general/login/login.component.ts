@@ -379,9 +379,10 @@ export class LoginComponent extends BaseCrudFilterComponent implements OnInit, O
   }
 	
   private closeRecoverPassword(){
+	  this.validationMessages = [];
 	  this.lostPassword = false;
 	  this.loginForm.reset();
-	  this.clearMessages(null);
+	  this.clearMessages(0);
 	  this.setProcessing(false);
   }
   
