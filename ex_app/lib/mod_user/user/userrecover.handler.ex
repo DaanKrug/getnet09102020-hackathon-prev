@@ -20,7 +20,8 @@ defmodule ExApp.UserRecoverHandler do
     token = GenericValidator.getToken(mapParams)
     email = UserValidator.getEmail(mapParams)
     cond do
-      (id == 0 or ownerId == 0 or SanitizerUtil.hasEmpty([email,token])) -> MessagesUtil.systemMessage(412)
+      (id == 0 or ownerId == 0 or SanitizerUtil.hasEmpty([email,token])) 
+        -> MessagesUtil.systemMessage(412)
       (id == -1) -> recoverUser(email,nil)
       true -> recoverNotRegistering(ownerId,token,ip,email)
     end

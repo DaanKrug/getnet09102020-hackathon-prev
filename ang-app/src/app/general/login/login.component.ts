@@ -277,6 +277,7 @@ export class LoginComponent extends BaseCrudFilterComponent implements OnInit, O
 		  if(this.processObjectAndValidationResult(user2,true)){
     		  this.logged.password = user.password;
     		  this.setStatusCode(211);
+    		  this.changePasswordForm.reset();
 			  this.clearMessages(null);
 			  this.setProcessing(false);
 			  return;
@@ -368,6 +369,7 @@ export class LoginComponent extends BaseCrudFilterComponent implements OnInit, O
 	      return;
 	  }
 	  let user = this.loginForm.value;
+	  user.ownerId = -1;
 	  this.setStatusCode(202);
 	  this.setProcessing(true);
 	  this.userService.recoverPassword(user).then(user2 => {
