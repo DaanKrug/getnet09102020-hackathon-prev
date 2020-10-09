@@ -84,6 +84,7 @@ defmodule ExApp.Endpoint do
     exts = path |> StringUtil.split(".")
     ext = Enum.at(exts,length(exts) - 1)
     cond do
+      (ext == "html") -> sendFile(conn,path)
       (ext == "css") -> loadCss(conn,path)
       (ext == "js") -> loadJs(conn,path)
       (ext == "ico") -> loadIco(conn,path)
@@ -97,7 +98,7 @@ defmodule ExApp.Endpoint do
   	conn = put_resp_content_type(conn, "text/html")
   	sendFile(conn,"/index.html")
   end
-  
+   
   defp notFound(conn) do
   	conn = put_resp_content_type(conn, "text/html")
     sendFile(conn,"/404.html")

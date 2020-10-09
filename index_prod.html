@@ -5,15 +5,14 @@
     	<meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=1" />
     	<meta name="theme-color" content="#ffffff" />
-    	<link rel="preconnect" href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com" />
-    	<link rel="apple-touch-icon" href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/pwa-192x192.png" />
+    	<link rel="preconnect" 
+    	      href="https://skallerten-cdn.s3.amazonaws.com" />
+    	<link rel="apple-touch-icon" 
+    	      href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/pwa-192x192.png" />
     	<link rel="manifest" href="./manifest.webmanifest" />
-    	<link rel="icon" type="image/x-icon" href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/favicon.ico" />
+    	<link rel="icon" type="image/x-icon" 
+    	      href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/favicon.ico" />
     	<meta name="title" content="Get Net 09 10 2020 App" />
-		<meta name="keywords" content="keywords" />
-		<meta name="description" content="description" />
-		<meta name="author" content="keywords" />
-		<meta name="rating" content="keywords" />
 		<style>
         	body{padding: 0; margin: 0; overflow: hidden;}
         	#appInternalFrame{display: none; border: 0; height: 100vh; width: 100%; overflow: hidden;}
@@ -24,20 +23,24 @@
         <div id="loading0">&nbsp;Loading ...</div>
     	<iframe id="appInternalFrame" src="" title="Get Net 09 10 2020 App"></iframe>
     	<script>
-    		if ('serviceWorker' in navigator) {
+    		if('serviceWorker' in navigator){
 			    window.addEventListener('load', () => {
 			    	navigator.serviceWorker.register('./serviceworker.js');
 			    });
 			}
-	    	var url = './getnet09102020';
-			var arr = window.location.href.split('?');
-			if(arr.length > 1){
-				url += '?' + arr[1];
-			}
-			var elem =  document.getElementById('appInternalFrame');
-			elem.src = url;
+			var elem = document.getElementById('appInternalFrame');
+			elem.src = './getnet09102020';
 			elem.style.display = 'block';
     		setTimeout(function(){document.getElementById('loading0').style.display = 'none';},300);
     	</script>
     </body>
 </html>
+
+
+
+
+
+
+
+
+

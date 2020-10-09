@@ -4,6 +4,7 @@
 *.ppk
 server_deploy.sh
 *.txt
+**/static_files/angular/*
 **/ex_app/priv/static/angular/*
 **/ex_app/priv/static/bootstrap/*
 **/ex_app/priv/static/fontawesome-5.11/*
