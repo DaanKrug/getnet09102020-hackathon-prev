@@ -17,7 +17,6 @@ defmodule ExApp.Endpoint do
   alias ExApp.FileController
   alias ExApp.ImageController
   alias ExApp.ModuleController
-  alias ExApp.AppThemeController
   alias ExApp.AppConfigController
   alias ExApp.S3ConfigController
   
@@ -39,7 +38,6 @@ defmodule ExApp.Endpoint do
   forward("/files",                            to: FileController)
   forward("/images",                           to: ImageController)
   forward("/modules",                          to: ModuleController)
-  forward("/appthemes",                        to: AppThemeController)
   forward("/appconfigs",                       to: AppConfigController)
   forward("/s3configs",                        to: S3ConfigController)
   

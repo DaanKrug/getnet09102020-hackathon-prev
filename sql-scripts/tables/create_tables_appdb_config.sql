@@ -18,36 +18,6 @@ ALTER TABLE `module`
   
   
   
-CREATE TABLE  `apptheme` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `defaultTheme` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `themes` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `organization` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `imageHeight` tinyint(2) NOT NULL,
-  `positionX` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `positionY` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `backgroundWidth` tinyint(2) NOT NULL,
-  `backgroundHeight` tinyint(2) NOT NULL,
-  `backgroundRepeat` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 0,
-  `ownerId` bigint(20) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `apptheme`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `apptheme_ownerid_index` (`ownerId`);
-
-ALTER TABLE `apptheme`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-  
-  
-  
-  
 CREATE TABLE  `appconfig` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,

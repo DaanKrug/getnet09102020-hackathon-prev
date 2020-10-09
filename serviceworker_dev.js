@@ -12,7 +12,8 @@ var urlsToPrefetch = [
 	siteUrl + '/tinymce-5.3.0/jquery.tinymce.min.js',
 	siteUrl + '/tinymce-5.3.0/tinymce.min.js',
 	siteUrl + '/webfonts/ubuntu/ubuntu.css',
-	siteUrl + '/angular/styles.css'
+	siteUrl + '/angular/styles.css',
+	siteUrl + '/themes/blue01.min.css'
 ];
 var requestProps = {method: 'GET',
 		            mode: 'no-cors',

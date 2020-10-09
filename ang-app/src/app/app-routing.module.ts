@@ -12,10 +12,6 @@ const routes: Routes = [
     loadChildren: () => import('./config/module/module.module').then(m => m.ModuleModule),
     canActivate: [UserServiceRouter] 
   },
-  { path: 'appthemes',              
-    loadChildren: () => import('./config/apptheme/apptheme.module').then(m => m.AppThemeModule),
-    canActivate: [UserServiceRouter] 
-  },
   { path: 'appconfigs',       
     loadChildren: () => import('./config/appconfig/appconfig.module').then(m => m.AppConfigModule),
     canActivate: [UserServiceRouter] 
@@ -84,7 +80,6 @@ const routes: Routes = [
     loadChildren: () => import('./general/login/login.module').then(m => m.LoginModule), 
     canActivate: [UserServiceRouter] 
   },
-  //insertionPoint -->
   { path: '**',redirectTo: '/',pathMatch: 'full' }
 ];
 

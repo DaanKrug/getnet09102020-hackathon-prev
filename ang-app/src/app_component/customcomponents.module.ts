@@ -6,11 +6,6 @@ import { FormToolbarModule }                  from './formtoolbar/formtoolbar.mo
 import { ContinueConfirmationModule }         from './continueconfirmation/continueconfirmation.module';
 import { DeleteConfirmationModule }           from './deleteconfirmation/deleteconfirmation.module';
 import { CaptchaModule }                      from './captcha/captcha.module';
-import { CommentModule }                      from './comment/comment.module';
-import { CarrousselModule }                   from './carroussel/carroussel.module';
-import { SiteHeaderModule }                   from './siteheader/siteheader.module';
-import { SitePoliciesModule }                 from './sitepolicies/sitepolicies.module';
-import { CreditsModule }                      from './credits/credits.module';
 import { RichFilterSelectorModule }           from './rich/richfilterselector/richfilterselector.module';
 import { RichImageSelectorModule }            from './rich/richimageselector/richimageselector.module';
 import { RichEditorModule }                   from './rich/richeditor/richeditor.module';
@@ -22,31 +17,27 @@ import { RichTabBarModule }                   from './rich/richtabbar/richtabbar
 import { RichDropDownButtonModule }           from './rich/richdropdownbutton/richdropdownbutton.module';
 import { RichMenuButtonModule }               from './rich/richmenubutton/richmenubutton.module';
 import { RichCheckboxMultiModule }            from './rich/richcheckboxmulti/richcheckboxmulti.module';
-import { RichChronometerModule }              from './rich/richchronometer/richchronometer.module';
-import { RichPlayerModule }                   from './rich/richplayer/richplayer.module';
 
 
 @NgModule({
   imports: [
     TableNavigatorModule, EditDeleteActionModule, FormActionModule, FormToolbarModule, 
     ContinueConfirmationModule, DeleteConfirmationModule,
-    CaptchaModule, CommentModule, CarrousselModule, SiteHeaderModule, SitePoliciesModule, CreditsModule,
+    CaptchaModule,
     RichFilterSelectorModule, RichImageSelectorModule, 
     RichEditorModule, RichCheckboxModule, RichDatePickerModule,
     RichInputTextModule, RichInputSelectModule, RichTabBarModule, 
-    RichDropDownButtonModule, RichMenuButtonModule, RichCheckboxMultiModule,
-    RichChronometerModule, RichPlayerModule
+    RichDropDownButtonModule, RichMenuButtonModule, RichCheckboxMultiModule
   ],
   declarations: [],
   exports: [
     TableNavigatorModule, EditDeleteActionModule, FormActionModule, FormToolbarModule, 
     ContinueConfirmationModule, DeleteConfirmationModule,
-    CaptchaModule, CommentModule, CarrousselModule, SiteHeaderModule, SitePoliciesModule, CreditsModule,
+    CaptchaModule,
     RichFilterSelectorModule, RichImageSelectorModule, 
     RichEditorModule, RichCheckboxModule, RichDatePickerModule,
     RichInputTextModule, RichInputSelectModule, RichTabBarModule, 
-    RichDropDownButtonModule, RichMenuButtonModule, RichCheckboxMultiModule,
-    RichChronometerModule, RichPlayerModule
+    RichDropDownButtonModule, RichMenuButtonModule, RichCheckboxMultiModule
   ]
 })
 export class CustomComponentsModule { }

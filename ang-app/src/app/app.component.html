@@ -1,4 +1,3 @@
-<div id="printDiv" class="printContent" style="display: none;"></div>
 
 <div id="noPrintDiv" class="noPrint">
 
@@ -22,20 +21,7 @@
 		   aria-label="Tela de bloqueio ativada, aguarde finalizar a execu&ccedil;&atilde;o."> Carregando ... </p>
 	</ngx-spinner>
 	
-	<form id="downloadForm" method="get" action="" target="_blank"></form>
-	
-	<site-header [themeStyle]="themeStyle" [appName]="appName" [appDescription]="appDescription"
-	             [render]="mainpageNumber >= 0 && useSiteHeader1" [renderText]="useSiteHeader1Text">
-	</site-header>
-	
 	<header *ngIf="mainpageNumber >= 0">
-		<site-policies [render]="useSitePolicies1" [mainpageNumber]="mainpageNumber"
-		               className="clear infoLinksNoHover" styleClass="text-align: right;" 
-		               [usePricingPolicy]="usePricingPolicy" (pricingPolicyEmitter)="pricingPolicy()"
-		               [useUsetermsPolicy]="useUsetermsPolicy" (userTermsEmitter)="userTerms()"
-		               [usePrivacityPolicy]="usePrivacityPolicy" (privacityPolicyEmitter)="privacityPolicy()"
-		               [useUsecontractPolicy]="useUsecontractPolicy" (useContractEmitter)="useContract()">
-		</site-policies>
 		<div class="header noPrint">
 			<div class="top-left">
 				<div class="field menuTop" *ngIf="logged">
@@ -48,7 +34,8 @@
 					</button>
 				</div>
 				
-				<div class="btn-group" ngbDropdown role="group" aria-label="In&iacute;cio" #drdBegin="ngbDropdown">
+				<div class="btn-group" ngbDropdown role="group" 
+				     aria-label="In&iacute;cio" #drdBegin="ngbDropdown">
 					<rich-dropdown-button label="In&iacute;cio" 
 				                          forToggle="true" 
 				                          ngbDropdownToggle>
@@ -74,25 +61,44 @@
 				    </div>
 				</div>
 				
-				<div class="btn-group" ngbDropdown role="group" aria-label="Escolher Tema" #drdThema="ngbDropdown">
-				    <rich-dropdown-button label="Skin" 
-				                          forToggle="true" 
-				                          ngbDropdownToggle>
-				    </rich-dropdown-button>
+				<div *ngIf="usePricingPolicy || useUsetermsPolicy 
+				            || usePrivacityPolicy || useUsecontractPolicy" 
+				     class="btn-group" ngbDropdown 
+				     role="group" aria-label="Políticas do Site" #drdPolitics="ngbDropdown">
+				    <button class="btn btn-outline-info" 
+				            ngbDropdownToggle 
+				            style="padding: 0; margin: 0.1em 0.1em 0 0.25em;" 
+				            tabIndex="0">
+				    	Políticas do Site
+				    </button>
 				    <div class="dropdown-menu" ngbDropdownMenu>
-				    	<button *ngFor="let theme of appThemes" 
-				                class="dropdown-item {{activeTheme == theme ? 'active' : ''}}" 
-				                (click)="setTheme(theme)" tabIndex="0">
-				                {{ getLabelForKey(themes,theme) }}
-				        </button>
+				    	<button class="dropdown-item {{ mainpageNumber == 1 ? 'active' : '' }}" 
+				    	        *ngIf="usePricingPolicy"
+						        (click)="pricingPolicy(); drdPolitics.close();" 
+						        tabIndex="0">
+							Política de Preços
+						</button>
+						<button class="dropdown-item {{ mainpageNumber == 2 ? 'active' : '' }}" 
+						        *ngIf="useUsetermsPolicy"
+						        (click)="userTerms(); drdPolitics.close();" 
+						        tabIndex="0">
+							Termos de Uso
+						</button>
+						<button class="dropdown-item {{ mainpageNumber == 3 ? 'active' : '' }}" 
+						        *ngIf="usePrivacityPolicy"
+						        (click)="privacityPolicy(); drdPolitics.close();" 
+						        tabIndex="0">
+							Política de Privacidade
+						</button>
+						<button class="dropdown-item {{ mainpageNumber == 4 ? 'active' : '' }}" 
+						        *ngIf="useUsecontractPolicy"
+						        (click)="useContract(); drdPolitics.close();" 
+						        tabIndex="0">
+							Contrato de Cliente
+						</button>
 				    </div>
 				</div>
-				<site-policies [render]="useSitePolicies2" [dropdown]="true" [mainpageNumber]="mainpageNumber"
-				               [usePricingPolicy]="usePricingPolicy" (pricingPolicyEmitter)="pricingPolicy()"
-				               [useUsetermsPolicy]="useUsetermsPolicy" (userTermsEmitter)="userTerms()"
-				               [usePrivacityPolicy]="usePrivacityPolicy" (privacityPolicyEmitter)="privacityPolicy()"
-				               [useUsecontractPolicy]="useUsecontractPolicy" (useContractEmitter)="useContract()">
-				</site-policies>
+				
 			</div>
 		    <div class="top-right">
 		    	<div *ngIf="!logged" class="btn-group" ngbDropdown 
@@ -116,7 +122,8 @@
 				    </div>
 				</div>
 				<div *ngIf="logged" class="btn-group" ngbDropdown 
-				     role="group" aria-label="A&ccedil;&otilde;es do usu&aacute;rio logado"  #drdLogin="ngbDropdown">
+				     role="group" aria-label="A&ccedil;&otilde;es do usu&aacute;rio logado"  
+				     #drdLogin="ngbDropdown">
 				    <rich-dropdown-button label="{{ logged.name }}" 
 				                          forToggle="true" 
 				                          ngbDropdownToggle>
@@ -152,12 +159,6 @@
 								                      (clickEmitter)="appconfigsView()"
 								                      (clickEmitter1)="drd1.close()">
 								</rich-dropdown-button>
-						    	<rich-dropdown-button label="Temas da Aplica&ccedil;&atilde;o" 
-						    	                      [activated]="view == 'appthemes'" 
-						    	                      [noRender]="!masterButtons"
-								                      (clickEmitter)="appthemesView()"
-								                      (clickEmitter1)="drd1.close()">
-								</rich-dropdown-button>
 						    	<rich-dropdown-button label="M&oacute;dulos da Aplica&ccedil;&atilde;o" 
 						    	                      [activated]="view == 'modules'" 
 						    	                      [noRender]="!masterButtons"
@@ -180,7 +181,8 @@
 						</div>
 			    	</div>
 			    	<div class="field">
-			    		<div class="btn-group" ngbDropdown role="group" aria-label="Gerenciar" #drd2="ngbDropdown">
+			    		<div class="btn-group" ngbDropdown role="group" 
+			    		     aria-label="Gerenciar" #drd2="ngbDropdown">
 						    <rich-dropdown-button label="Gerenciar" 
 						                          forToggle="true"
 						                          ngbDropdownToggle>
@@ -224,37 +226,13 @@
 		    	<div style="clear: both;"></div>
 		    </div>
 		</div>
-		<site-policies [render]="useSitePolicies3" [mainpageNumber]="mainpageNumber"
-		               className="clear infoLinksNoHover" styleClass="text-align: center;" 
-		               [usePricingPolicy]="usePricingPolicy" (pricingPolicyEmitter)="pricingPolicy()"
-		               [useUsetermsPolicy]="useUsetermsPolicy" (userTermsEmitter)="userTerms()"
-		               [usePrivacityPolicy]="usePrivacityPolicy" (privacityPolicyEmitter)="privacityPolicy()"
-		               [useUsecontractPolicy]="useUsecontractPolicy" (useContractEmitter)="useContract()">
-		</site-policies>
 	</header>
 	
-	<site-header [themeStyle]="themeStyle" [appName]="appName" [appDescription]="appDescription"
-	             [render]="useSiteHeader2" [renderText]="useSiteHeader2Text">
-	</site-header>
-	
-	<ng-template [ngIf]="publicModeView">
-		<div class="position-ref">
-			<site-header [themeStyle]="themeStyle" 
-			             [render]="useSiteHeader3 && !useSiteHeader1 && !useSiteHeader2">
-			</site-header>
-			<div class="alert-danger" *ngIf="offline">
-				Falha de Conex&atilde;o. Recarregando p&aacute;gina em {{ reloadTime }} segundos.
-			</div>
-			<site-policies [render]="useSitePolicies4" [mainpageNumber]="mainpageNumber"
-			               className="clear infoLinks" styleClass="text-align: center; margin-top: 2em;" 
-			               [usePricingPolicy]="usePricingPolicy" (pricingPolicyEmitter)="pricingPolicy()"
-			               [useUsetermsPolicy]="useUsetermsPolicy" (userTermsEmitter)="userTerms()"
-			               [usePrivacityPolicy]="usePrivacityPolicy" (privacityPolicyEmitter)="privacityPolicy()"
-			               [useUsecontractPolicy]="useUsecontractPolicy" (useContractEmitter)="useContract()">
-			</site-policies>
-			<div class="clear"></div>
-		</div>
-	</ng-template>
+	<div class="fullImg"
+	     style="background-image: url('https://skallerten-cdn.s3.amazonaws.com/headers/aircity-min.jpg'); 
+				background-position: center center; background-repeat: no-repeat; 
+				background-size: 100% 100%; width: 100%; height: 12em;">
+	</div>
 	
 	<div *ngIf="mainpageNumber >= 0 && logged && showMenuOnTop" class="clear"></div>
 	
@@ -276,11 +254,6 @@
 					        	<rich-menu-button label="Configura&ccedil;&otilde;es da Aplica&ccedil;&atilde;o" 
 					        	                  (clickEmitter)="appconfigsView()" 
 								                  [activated]="view == 'appconfigs'" 
-								                  [noRender]="!masterButtons">
-								</rich-menu-button>
-						    	<rich-menu-button label="Temas da Aplica&ccedil;&atilde;o" 
-						    	                  (clickEmitter)="appthemesView()" 
-								                  [activated]="view == 'appthemes'" 
 								                  [noRender]="!masterButtons">
 								</rich-menu-button>
 						    	<rich-menu-button label="M&oacute;dulos da Aplica&ccedil;&atilde;o" 
@@ -355,16 +328,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<credits [render]="!logged"
-	         author="Equipe Hackaton Get Net 09102020" 
-	         text="Membros:|Daniel Augusto Krug: Engenheiro de Software - Arquiteto de Solu&ccedil;&otilde;es - Full Stack Developer|Echo Ping: Somente Echo"
-	         sites=""
-	         thirdParts="Google Ubuntu Font | https://fonts.google.com/?query=ubuntu,
-	                     TinyMCE Editor | https://www.tiny.cloud,
-	                     Font Awesome Icons | https://fontawesome.com,
-	                     Bootstrap CSS | https://getbootstrap.com">
-	</credits>
 	
 	<div style="z-index: 1000050;" 
 	     aria-hidden="true" 

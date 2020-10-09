@@ -19,7 +19,6 @@ import { CipherService } from '../../app_base/cipher/cipher.service';
 
 import { MailerConfigService } from '../config/mailerconfig/mailerconfig.service';
 import { ModuleService } from '../config/module/module.service';
-import { AppThemeService } from '../config/apptheme/apptheme.service';
 import { AppConfigService } from '../config/appconfig/appconfig.service';
 import { S3ConfigService } from '../config/s3config/s3config.service';
 
@@ -34,7 +33,6 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
 
 	mailerConfigService: MailerConfigService;
 	moduleService: ModuleService;
-	appThemeService: AppThemeService;
 	appConfigService: AppConfigService;
 	s3ConfigService: S3ConfigService;
     appLogService: AppLogService;
@@ -112,12 +110,12 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
 	getAppPrefix(){
 		return this.meta.getTag('name=app-prefix').content;
 	}
-     
-    // Do not override!
+	
+	// Do not override!
     downloadFile(link){
   	    this.eventEmitterService.get('downloadFile').emit({link: link});
     }
-    
+     
 	// Do not override!
     setMinMaxDateConfigDefault(){
     	this.dateConfig.minDate = {year: (new Date().getFullYear() - 1), month: 1, day: 1};
@@ -187,10 +185,6 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
 		if(toAactivateServices.includes('module')){
 			this.moduleService = new ModuleService(this.http);
 			this.injectServiceDependencies(this.moduleService);
-		}
-		if(toAactivateServices.includes('apptheme')){
-			this.appThemeService = new AppThemeService(this.http);
-			this.injectServiceDependencies(this.appThemeService);
 		}
         if(toAactivateServices.includes('appconfig')){
         	this.appConfigService = new AppConfigService(this.http);

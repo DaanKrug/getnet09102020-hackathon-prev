@@ -17,7 +17,7 @@
     </head>
     <body style="margin: 0; padding: 0;">
     	<div id="mainframe" style="display: none;">
-    		<link href="" rel="stylesheet" id="themeLink"/>
+    		<link href="https://getnet09102020-cdn.s3.amazonaws.com/themes/blue01.min.css" rel="stylesheet"/>
     		<link href="https://skallerten-cdn.s3.amazonaws.com/bootstrap/bootstrap-reduced.min.css" rel="stylesheet" />
             <link href="https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/custom.min.css" rel="stylesheet" />
             <link href="https://skallerten-cdn.s3.amazonaws.com/fontawesome-5.11/css/all.min.css" rel="stylesheet" />
@@ -51,7 +51,6 @@
     	    var url = null != window.parent ? window.parent.location.href : window.location.href;
         	var appId = document.querySelector('meta[name="app-id"]').content;
         	var appPrefix = document.querySelector('meta[name="app-prefix"]').content;
-        	var actualTheme = '_actual_theme_' + appId;
         	var cdn = 'https://skallerten-cdn.s3.amazonaws.com';
         	sessionStorage.setItem('_cdn_' + appId,cdn);
         	function genToken(){
@@ -66,43 +65,11 @@
        	    function setStorage(){
            	    var arr = url.split('//');
            	    sessionStorage.removeItem('_ownerId_' + appId);
-           	    sessionStorage.removeItem('_subAppType_' + appId);
-           	    sessionStorage.removeItem('_subAppId_' + appId);
            	    sessionStorage.setItem('_token_' + appId,genToken());
            	    sessionStorage.setItem('_doc_base_' + appId,arr[0] + '//' + arr[1].split('/')[0] + '/' + appPrefix);
            	    sessionStorage.setItem('_lastActivity_' + appId,new Date().getTime());
-           	    var arrParams = (url.indexOf('?') != -1) ? url.split('?')[1].split('&') : [];
-        		if(arrParams.length > 0 && arrParams[0].indexOf('=') != -1){
-        			var arr2 = arrParams[0].split('=');
-        			if(arr2.length > 1 && null!=arr2[0] && null!=arr2[1]){
-        				sessionStorage.setItem('_subAppType_' + appId,arr2[0]);
-        				sessionStorage.setItem('_subAppId_' + appId,arr2[1]);
-        			}
-       			}
        	    }
-           	function setTheme(){
-           		var alreadyLoaded = sessionStorage.getItem('alreadyLoaded');
-           		if(null!=alreadyLoaded && alreadyLoaded != ''){
-           			setTimeout(function(){sessionStorage.removeItem('alreadyLoaded');},10000);
-               		return;
-               	}
-           		sessionStorage.setItem('alreadyLoaded','yes');
-           		var el = document.getElementById('themeLink');
-               	var oldTheme = localStorage.getItem(actualTheme);
-               	if(null==oldTheme || oldTheme == ''){
-               		oldTheme = 'dark01';
-               	}
-               	if((cdn + '/themes/' + oldTheme + '.min.css') == el.href){
-               		return;
-               	}
-               	el.rel = 'stylesheet';
-           		el.href = cdn + '/themes/' + oldTheme + '.min.css';
-           		localStorage.setItem(actualTheme,oldTheme);
-           	}
            	setStorage();
-           	setTimeout(() => {
-           		setTheme();
-           	},50);
 			setTimeout(() => {
 				document.getElementById('loadingDiv').style.display = 'none';
          		document.getElementById('mainframe').style.display = 'block';
