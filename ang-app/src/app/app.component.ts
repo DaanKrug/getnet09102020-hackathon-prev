@@ -31,7 +31,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
     mailerconfigButtons: boolean;
     simplemailButtonsManager: boolean;
     fileButtonsManager: boolean;
-    imageButtonsManager: boolean;
+    fullButtonsManager: boolean;
     userButtonsManager: boolean;
     applogButtonsManager: boolean;
     verifyActivityInterval: any;
@@ -66,7 +66,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		this.mailerconfigButtons = null;
 		this.simplemailButtonsManager = null;
 		this.fileButtonsManager = null;
-		this.imageButtonsManager = null;
+		this.fullButtonsManager = null;
 		this.userButtonsManager = null;
 		this.applogButtonsManager = null;
 		clearInterval(this.verifyActivityInterval);
@@ -102,6 +102,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
                                       .subscribe(data => {this.loadModules();});
 		this.subscriptions[i++] = this.eventEmitterService.get('mainpage')
                                       .subscribe(data => {this.mainpageView();});
+		
 	}
 	
 	loadConfig(){
@@ -190,7 +191,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		this.mailerconfigButtons = false;
 		this.simplemailButtonsManager = false;
 		this.fileButtonsManager = false;
-		this.imageButtonsManager = false;
+		this.fullButtonsManager = false;
 		this.userButtonsManager = false;
 		this.applogButtonsManager = false;
 		if(this.emptyObject(this.logged) || !(this.logged.id > 0)){
@@ -207,9 +208,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 				                || (this.adminButtons && this.permissions.includes('file')))
 				                && this.modulesNames.includes('file');
 		
-		this.imageButtonsManager = (this.masterButtons 
-                                 || (this.adminButtons && this.permissions.includes('image')))
-                                 && (this.modulesNames.includes('image') || this.modulesNames.includes('slider'));
+		this.fullButtonsManager = ['admin_master','admin','system_auditor','enroll'].includes(this.logged.category);;
 		this.userButtonsManager = (this.masterButtons 
                                 || (this.adminButtons && this.permissions.includes('user')));
 		this.applogButtonsManager = (this.masterButtons 
@@ -258,6 +257,10 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	imagesView(){ this.navigateTo('images','Imagens'); }
 	
 	filesView(){ this.navigateTo('files','Arquivos'); }
+	
+	categoryproductsView(){ this.navigateTo('categoryproducts','Categorias de Produtos'); }
+	
+	productsView(){ this.navigateTo('products','Produtos'); }
 	
 	applogsView(){ this.navigateTo('applogs','Logs da Aplica&ccedil;&atilde;o'); }
 	

@@ -9,7 +9,7 @@ export class ImageService extends BaseCrudService {
   
   getEmptyObject(conditions) :Object{
 	  var ownerId: number = parseInt('0' + this.storageService.localStorageGetItem('_ownerId_' + this.getAppId()));
-	  return new Image(0,conditions,null,null,null,false,
+	  return new Image(0,conditions,null,null,
 			           ownerId,
 			           this.storageService.localStorageGetItem('_token_' + this.getAppId()),null,null);
   }
@@ -25,8 +25,6 @@ export class ImageService extends BaseCrudService {
   mergeAnotherInObject(object,anotherObject){
 	  object.name = super.getChangedValue(anotherObject.name,object.name);
 	  object.link = super.getChangedValue(anotherObject.link,object.link);
-	  object.description = super.getChangedValue(anotherObject.description,object.description);
-	  object.forPublic = super.getChangedValue(anotherObject.forPublic,object.forPublic);
 	  object.ownerId = super.getChangedValue(anotherObject.ownerId,object.ownerId);
   	  return object;
   }

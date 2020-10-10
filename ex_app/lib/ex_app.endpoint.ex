@@ -19,6 +19,8 @@ defmodule ExApp.Endpoint do
   alias ExApp.ModuleController
   alias ExApp.AppConfigController
   alias ExApp.S3ConfigController
+  alias ExApp.CcategoryproductController
+  alias ExApp.ProductController
   
   
   plug(Plug.Logger, log: :debug)
@@ -40,6 +42,8 @@ defmodule ExApp.Endpoint do
   forward("/modules",                          to: ModuleController)
   forward("/appconfigs",                       to: AppConfigController)
   forward("/s3configs",                        to: S3ConfigController)
+  forward("/ccategoryproducts",                to: CcategoryproductController)
+  forward("/products",                         to: ProductController)
   
   match _ do
     host = MapUtil.get(conn,:host)

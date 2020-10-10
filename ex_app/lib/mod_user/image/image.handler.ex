@@ -7,6 +7,7 @@ defmodule ExApp.ImageHandler do
   alias ExApp.GenericValidator
   alias ExApp.ImageValidator
   alias ExApp.Image
+  alias ExApp.ProductService
   
   def objectClassName() do
     "Imagem"
@@ -46,6 +47,7 @@ defmodule ExApp.ImageHandler do
   def validateToDelete(id,image) do
     cond do
       (!(id > 0) or nil == image) -> MessagesUtil.systemMessage(412)
+      (ProductService.imageIsIn(id)) -> MessagesUtil.systemMessage(100308)
       true -> MessagesUtil.systemMessage(205)
     end
   end

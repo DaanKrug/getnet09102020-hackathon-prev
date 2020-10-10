@@ -177,6 +177,12 @@
 								                      (clickEmitter)="mailerconfigsView()"
 								                      (clickEmitter1)="drd1.close()">
 								</rich-dropdown-button>
+								<rich-dropdown-button label="Categoria Produtos" 
+								                      [activated]="view == 'categoryproducts'" 
+								                      [noRender]="!masterButtons"
+								                      (clickEmitter)="categoryproductsView()"
+								                      (clickEmitter1)="drd1.close()">
+								</rich-dropdown-button>
 						    </div>
 						</div>
 			    	</div>
@@ -202,8 +208,14 @@
 								</rich-dropdown-button>
 								<rich-dropdown-button label="Imagens" 
 						    	                      [activated]="view == 'images'" 
-						    	                      [noRender]="!imageButtonsManager"
+						    	                      [noRender]="!fullButtonsManager"
 								                      (clickEmitter)="imagesView()"
+								                      (clickEmitter1)="drd2.close()">
+								</rich-dropdown-button>
+								<rich-dropdown-button label="Produtos" 
+						    	                      [activated]="view == 'products'" 
+						    	                      [noRender]="!fullButtonsManager"
+								                      (clickEmitter)="productsView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
 								<rich-dropdown-button label="Pessoas / Usu&aacute;rios" 
@@ -229,6 +241,7 @@
 	</header>
 	
 	<div class="fullImg"
+		 *ngIf="!logged"
 	     style="background-image: url('https://skallerten-cdn.s3.amazonaws.com/headers/aircity-min.jpg'); 
 				background-position: center center; background-repeat: no-repeat; 
 				background-size: 100% 100%; width: 100%; height: 12em;">
@@ -271,6 +284,11 @@
 								                  [activated]="view == 'mailerconfigs'" 
 								                  [noRender]="!mailerconfigButtons">
 								</rich-menu-button>
+								<rich-menu-button label="Categoria Produtos" 
+								                  (clickEmitter)="categoryproductsView()" 
+								                  [activated]="view == 'categoryproducts'" 
+								                  [noRender]="!masterButtons">
+								</rich-menu-button>
 					        </div>
 					    </div>
 					</div>
@@ -296,7 +314,12 @@
 						    	<rich-menu-button label="Imagens" 
 						    	                  (clickEmitter)="imagesView()" 
 								                  [activated]="view == 'images'" 
-								                  [noRender]="!imageButtonsManager">
+								                  [noRender]="!fullButtonsManager">
+								</rich-menu-button>
+								<rich-menu-button label="Produtos" 
+						    	                  (clickEmitter)="productsView()" 
+								                  [activated]="view == 'products'" 
+								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
 						    	<rich-menu-button label="Pessoas / Usu&aacute;rios" 
 						    	                  (clickEmitter)="usersView()" 

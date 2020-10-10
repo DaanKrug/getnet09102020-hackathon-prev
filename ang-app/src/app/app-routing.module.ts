@@ -80,6 +80,16 @@ const routes: Routes = [
     loadChildren: () => import('./general/login/login.module').then(m => m.LoginModule), 
     canActivate: [UserServiceRouter] 
   },
+  { path: 'categoryproducts',
+	loadChildren: () => import('./config/ccategoryproduct/ccategoryproduct.module')
+	  					     .then(m => m.CcategoryproductModule), 
+	canActivate: [UserServiceRouter] 
+  },
+  { path: 'products',
+	loadChildren: () => import('./management/product/product.module')
+		  					 .then(m => m.ProductModule), 
+	canActivate: [UserServiceRouter] 
+  },
   { path: '**',redirectTo: '/',pathMatch: 'full' }
 ];
 

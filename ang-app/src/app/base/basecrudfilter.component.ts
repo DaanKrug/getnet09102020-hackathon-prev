@@ -21,6 +21,7 @@ import { MailerConfigService } from '../config/mailerconfig/mailerconfig.service
 import { ModuleService } from '../config/module/module.service';
 import { AppConfigService } from '../config/appconfig/appconfig.service';
 import { S3ConfigService } from '../config/s3config/s3config.service';
+import { CcategoryproductService } from '../config/ccategoryproduct/ccategoryproduct.service';
 
 import { AppLogService } from '../general/applog/applog.service';
 import { SimpleMailService } from '../general/simplemail/simplemail.service';
@@ -28,6 +29,8 @@ import { SimpleMailService } from '../general/simplemail/simplemail.service';
 import { UserService } from '../management/user/user.service';
 import { ImageService } from '../management/image/image.service';
 import { FileService } from '../management/file/file.service';
+import { ProductService } from '../management/product/product.service';
+
 
 export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit, OnDestroy{
 
@@ -35,11 +38,13 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
 	moduleService: ModuleService;
 	appConfigService: AppConfigService;
 	s3ConfigService: S3ConfigService;
+    ccategoryproductService: CcategoryproductService;
     appLogService: AppLogService;
     simpleMailService: SimpleMailService;
     userService: UserService;
     imageService: ImageService;
     fileService: FileService;
+    productService: ProductService;
 
     modulesNames: string[];
     themes: Object[];
@@ -214,6 +219,16 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
         	this.fileService = new FileService(this.http);
       	    this.injectServiceDependencies(this.fileService);
         }
+        if(toAactivateServices.includes('categoryproduct')){
+        	this.ccategoryproductService = new CcategoryproductService(this.http);
+      	    this.injectServiceDependencies(this.ccategoryproductService);
+        }
+        if(toAactivateServices.includes('product')){
+        	this.productService = new ProductService(this.http);
+      	    this.injectServiceDependencies(this.productService);
+        }
+        
+        
         
         // generic objects
 		this.themes = [

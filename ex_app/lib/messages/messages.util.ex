@@ -1114,10 +1114,29 @@ defmodule ExApp.MessagesUtil do
                                  "Falha ao criar <strong>Ponto Avaliação Submissão</strong>.")
       (messageCode == 100302) -> ReturnUtil.getValidationResult(100302,
                                  "Falha ao alterar <strong>Ponto Avaliação Submissão</strong>.") 
+      
       (messageCode == 100303) -> ReturnUtil.getValidationResult(100303,
-                                 "Falha ao criar <strong>Solicitação Correção Trabalho</strong>.")
+                                 "Falha ao criar <strong>Categoria Produto</strong>.")
       (messageCode == 100304) -> ReturnUtil.getValidationResult(100304,
-                                 "Falha ao alterar <strong>Solicitação Correção Trabalho</strong>.")
+                                 "Falha ao alterar <strong>Categoria Produto</strong>.")
+      (messageCode == 100305) -> ReturnUtil.getValidationResult(100305,
+                                 "Falha ao criar <strong>Produto</strong>.")
+      (messageCode == 100306) -> ReturnUtil.getValidationResult(100306,
+                                 "Falha ao alterar <strong>Produto</strong>.")
+      (messageCode == 100307) -> ReturnUtil.getValidationResult(100307,
+                                 "<strong>Imagem</strong> informada não existe.") 
+      (messageCode == 100308) -> ReturnUtil.getValidationResult(100308,
+                                 """
+                                 <strong>Imagem</strong> em questão não pode ser excluída pois
+                                 está vinculada à produto(s).
+                                 """) 
+      (messageCode == 100309) -> ReturnUtil.getValidationResult(100309,
+                                 "<strong>Categoria Produto</strong> informada não existe.")
+      (messageCode == 100310) -> ReturnUtil.getValidationResult(100310,
+                                 """
+                                 <strong>Categoria Produto</strong> em questão não pode ser excluída 
+                                 pois está vinculada à produto(s).
+                                 """)
       true -> systemMessage(0)
     end
   end

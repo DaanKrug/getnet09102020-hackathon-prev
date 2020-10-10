@@ -8,7 +8,7 @@ CREATE TABLE  `user` (
   `permissions` text COLLATE utf8mb4_general_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 1,
   `confirmation_code` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ownerId` bigint(20) UNSIGNED DEFAULT NULL,
+  `ownerId` bigint(20) UNSIGNED DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -69,3 +69,36 @@ ALTER TABLE `image`
   
   
   
+CREATE TABLE `ccategoryproduct` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `ccategoryproduct` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `ccategoryproduct` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+
+
+CREATE TABLE `product` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a2_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a3_description` text COLLATE utf8mb4_general_ci NOT NULL,
+     `a4_imageid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+     `a5_imagelink` text COLLATE utf8mb4_general_ci DEFAULT NULL,
+     `a6_categoryid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+     `a7_categoryname` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `product` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `product` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

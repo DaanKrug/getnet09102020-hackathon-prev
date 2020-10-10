@@ -1,0 +1,129 @@
+<form-toolbar [title]="title" [editing]="editing" [searchForm]="searchForm" 
+			  (onSearchFormSubmitEmitter)="onSearchFormSubmit()" (listDataEmitter)="listData()"
+			  (listDataNoCacheEmitter)="listDataNoCache()"
+			  [auditingExclusions]="auditingExclusions"
+			  [enabledAuditList]="['admin_master','admin','system_auditor'].includes(logged.category)"
+	          (auditListEmitter)="auditList()" (normalListEmitter)="normalList()"
+	          [disabledAddNew]="!(['admin_master'].includes(logged.category))
+	                              && !(['admin'].includes(logged.category) 
+	                              && permissions.includes('categoryproduct_write'))"
+	          (addObjectEmitter)="addObject()">
+</form-toolbar>
+
+<ng-template [ngIf]="editing" [ngIfElse]="listObjects">
+	<section aria-label="cadastro e alteracao de Categoria Produtos" class="dataForm"> 
+		<form [formGroup]="dataForm" (ngSubmit)="onObjectFormSubmit()">   	
+			<div >	
+				<rich-input-text [formGroup]="dataForm" 
+				                 label="Identifica&ccedil;&atilde;o (*)" 
+				                 titlee="Identifica&ccedil;&atilde;o"
+				                 maxchars="250"
+				                 formControlName="a1_name" 
+				                 widthPerc="100" 
+				                 placeholderr="" 
+				                 ngDefaultControl>
+				</rich-input-text> 
+				<div class="clear"></div>
+			</div> 
+			<form-action [validationMessages]="validationMessages" 
+			             [processValidation]="processValidation" 
+			             (cancelDataEmitter)="cancelData()">
+			</form-action>
+		</form>
+	</section>
+</ng-template>
+
+<ng-template #listObjects>
+	<section aria-label="lista dos Categoria Produtos">
+		<table class="table" *ngIf="objects as listOfObject" mdbTable> 
+			<thead class="black white-text">
+				<tr>
+					<th scope="col" style="width: auto;" 
+					    title="Identifica&ccedil;&atilde;o" 
+					    aria-label="Identifica&ccedil;&atilde;o">
+						Identifica&ccedil;&atilde;o
+					</th>
+					<th scope="col" style="width: 7em;" 
+					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
+					<th scope="col" style="width: 5em;" 
+					    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr mdbTableCol *ngFor="let ccategoryproduct of objects; trackBy: trackById">
+					<td class="text" [innerHtml]="ccategoryproduct.a1_name"></td>
+					<td class="actions">
+						<div class="buttons">
+							<edit-delete-action [auditingExclusions]="auditingExclusions" 
+							                    [object]="ccategoryproduct" [logged]="logged"
+							                    [noAction]="!(['admin_master'].includes(logged.category))
+								                              && !(['admin'].includes(logged.category) 
+								                              && permissions.includes('categoryproduct_write'))" 
+							                    (editObjectEmitter)="editObject($event)"
+							                    [objectDetail]="objectDetail" 
+							                    (showObjectEmitter)="showObject($event)"
+							                    [objectDeleteConfirmation]="objectDeleteConfirmation" 
+							                    (deleteObjectEmitter)="deleteObject($event)"
+							                    [objectUnDeleteConfirmation]="objectUnDeleteConfirmation" 
+							                    (unDeleteObjectEmitter)="unDeleteObject($event)">
+							</edit-delete-action>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="navigationBottom">
+						<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
+						                 [previousPageDisabled]="previousPageDisabled" 
+						                 [nextPageDisabled]="nextPageDisabled" 
+						                 [rowsPerPage]="rowsPerPage" [totalPages]="totalPages" 
+						                 [totalRows]="totalRows"
+						                 (previousPageEmitter)="previousPage()" 
+						                 (setPageEmitter)="setPage($event)"
+						                 (nextPageEmitter)="nextPage()">
+						</table-navigator>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</ng-template>
+
+<ng-template #selectedObjectTemplate>
+	<tr>
+		<th scope="row" class="text" style="width: 12em;"
+ 		    title="Identifica&ccedil;&atilde;o"
+ 		    aria-label="Identifica&ccedil;&atilde;o">
+ 			Identifica&ccedil;&atilde;o:
+ 		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a1_name"></td>
+	</tr>
+</ng-template>
+
+<ng-template #objectDetail let-modal>
+	<delete-confirmation label="do Categoria Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     info="true" [templateOutlet]="selectedObjectTemplate" 
+	                     (cancelDataEmitter)="showObject()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectDeleteConfirmation let-modal>
+	<delete-confirmation label="Categoria Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectUnDeleteConfirmation let-modal>
+	<delete-confirmation label="Categoria Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     redo="true" [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmUnDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>

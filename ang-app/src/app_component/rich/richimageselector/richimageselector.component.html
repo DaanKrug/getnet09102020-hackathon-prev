@@ -30,29 +30,32 @@
 	            style="height: calc(1.5em + 0.65rem + 2px);" 
 	            class="form-control {{className}}" 
 	            (change)="valueChanged()">
-	    	<option value="-1" [selected]="null == selectedObject" *ngIf="null != minusOneLabel">
+	    	<option value="-1" [selected]="emptyObject(selectedObject)" 
+	    	        *ngIf="!emptyObject(minusOneLabel)">
 	        	{{ minusOneLabel }}
 	        </option>
-	        <option value="0" [selected]="null == selectedObject" *ngIf="null != zeroLabel">
+	        <option value="0" [selected]="emptyObject(selectedObject)" 
+	                *ngIf="!emptyObject(zeroLabel)">
 	        	{{ zeroLabel }}
 	        </option>
-	        <option value="" [selected]="null == selectedObject" *ngIf="null != emptyLabel">
+	        <option value="" [selected]="emptyObject(selectedObject)" 
+	                *ngIf="!emptyObject(emptyLabel)">
 	        	{{ emptyLabel }}
 	        </option>
 	        <option *ngFor="let object of objects" 
-	        	    value="{{null != object.id ? object.id : object.value}}"
-	        	    [selected]="null != selectedObject 
-	        	                && ((null != object.id && selectedObject.id == object.id) 
-	        	                    || (null != object.value && selectedObject.value == object.value))">
-	        	{{ null != object.name ? object.name : '' }}
-	        	{{ null == object.name && null != object.label ? object.label : '' }}
-	        	{{ null == object.name && null == object.label 
-	        	   && null != object.identifier ? object.identifier : '' }}
+	        	    value="{{!emptyObject(object.id) ? object.id : object.value}}"
+	        	    [selected]="!emptyObject(selectedObject) 
+	        	                && ((!emptyObject(object.id) && selectedObject.id == object.id) 
+	        	                    || (!emptyObject(object.value) && selectedObject.value == object.value))">
+	        	{{ !emptyObject(object.name) ? object.name : '' }}
+	        	{{ emptyObject(object.name) && !emptyObject(object.label) ? object.label : '' }}
+	        	{{ emptyObject(object.name) && emptyObject(object.label) 
+	        	   && !emptyObject(object.identifier) ? object.identifier : '' }}
 	        </option>
 		</select>
 	</div>
 	<div class="clear" style="margin-bottom: .5em;"></div>
-	<div class="field" style="width: 100%;" *ngIf="null == oldSelectedObject">
+	<div class="field" style="width: 100%;" *ngIf="emptyObject(oldSelectedObject)">
 		<div>
 			<label for="{{id}}NewImage" title="Imagem Selecionada" aria-label="Imagem Selecionada">
 				Imagem Selecionada:
@@ -60,12 +63,12 @@
 		</div>
 		<div style="width: 98%; margin: .2em auto; border-radius: .3em; height: 12em; padding: 0;">
 			<img id="{{id}}NewImage" src=""
-	           	 *ngIf="null != selectedObject" 
+	           	 *ngIf="!emptyObject(selectedObject)" 
 	           	 style="margin: 0; border: 0; border-radius: .3em; width: 100%; height: 12em;"/>
-	        <span *ngIf="null == selectedObject">Nenhuma Imagem Selecionada</span>
+	        <span *ngIf="emptyObject(selectedObject)">Nenhuma Imagem Selecionada</span>
 		</div>
 	</div>
-	<div class="field" style="width: 49.5%;" *ngIf="null != oldSelectedObject">
+	<div class="field" style="width: 49.5%;" *ngIf="!emptyObject(oldSelectedObject)">
 		<div>
 			<label for="{{id}}OldImage" title="Imagem Atual" aria-label="Imagem Atual">
 				Imagem Atual:
@@ -76,7 +79,7 @@
 	           	 style="margin: 0; border: 0; border-radius: .3em; width: 100%; height: 12em;"/>
 		</div>
 	</div>
-	<div class="field" style="width: 49.5%;" *ngIf="null != oldSelectedObject">
+	<div class="field" style="width: 49.5%;" *ngIf="!emptyObject(oldSelectedObject)">
 		<div>
 			<label for="{{id}}NewImage" title="Imagem Selecionada" aria-label="Imagem Selecionada">
 				Imagem Selecionada:
@@ -84,9 +87,9 @@
 		</div>
 		<div style="width: 99%; margin: .2em auto; border-radius: .3em; height: 12em; padding: 0;">
 			<img id="{{id}}NewImage" src=""
-	           	 *ngIf="null != selectedObject" 
+	           	 *ngIf="!emptyObject(selectedObject)" 
 	           	 style="margin: 0; border: 0; border-radius: .3em; width: 100%; height: 12em;"/>
-	        <span *ngIf="null == selectedObject">Nenhuma Imagem Selecionada</span>
+	        <span *ngIf="emptyObject(selectedObject)">Nenhuma Imagem Selecionada</span>
 		</div>
 	</div>
 	<div class="clear" style="margin-bottom: .5em;"></div>

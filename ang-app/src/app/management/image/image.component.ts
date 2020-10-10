@@ -26,9 +26,7 @@ export class ImageComponent extends BaseCrudFilterComponent implements OnInit, O
 	  this.editTitle = 'Editar Imagem';
 	  this.dataForm = new FormGroup({
           link: new FormControl('', [Validators.required]),
-          name: new FormControl('', [Validators.required]),
-          description: new FormControl('', []),
-          forPublic: new FormControl('', [])
+          name: new FormControl('', [Validators.required])
       });
       super.ngOnInit();
   }
@@ -74,17 +72,11 @@ export class ImageComponent extends BaseCrudFilterComponent implements OnInit, O
 	  super.setObject(image);
 	  this.dataForm.setValue({
 	      link: image.link,
-		  name: image.name,
-		  description: image.description,
-          forPublic: image.forPublic
+		  name: image.name
 	  });
   }
   
   prepareToSaveUpdate(image){
-	  if(this.logged.category != 'admin_master'){
-		  image.description = null;
-		  image.forPublic = false;
-	  }
 	  return image;
   }
   

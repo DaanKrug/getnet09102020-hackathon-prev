@@ -16,7 +16,6 @@ defmodule ExApp.UserHandler do
   alias ExApp.MailerConfigService
   alias ExApp.ImageService
   alias ExApp.FileService
-  alias ExApp.AppThemeService
   alias ExApp.AppConfigService
   alias ExApp.S3ConfigService
   
@@ -77,7 +76,6 @@ defmodule ExApp.UserHandler do
       (validateOwnerAdmin and MailerConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100096)
       (validateOwnerAdmin and ImageService.userIsOwner(id)) -> MessagesUtil.systemMessage(100098)
       (validateOwnerAdmin and FileService.userIsOwner(id)) -> MessagesUtil.systemMessage(100100)
-      (validateOwnerAdmin and AppThemeService.userIsOwner(id)) -> MessagesUtil.systemMessage(100102)
       (validateOwnerAdmin and AppConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100106)
       (validateOwnerAdmin and S3ConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100128)
       true -> MessagesUtil.systemMessage(205)
@@ -96,7 +94,6 @@ defmodule ExApp.UserHandler do
       (ownerAdmin and MailerConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100097)
       (ownerAdmin and ImageService.userIsOwner(id)) -> MessagesUtil.systemMessage(100099)
       (ownerAdmin and FileService.userIsOwner(id)) -> MessagesUtil.systemMessage(100101)
-      (ownerAdmin and AppThemeService.userIsOwner(id)) -> MessagesUtil.systemMessage(100103)
       (ownerAdmin and AppConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100107)
       (MailerConfigService.userIsIn(id)) -> MessagesUtil.systemMessage(100116)
       (ownerAdmin and S3ConfigService.userIsOwner(id)) -> MessagesUtil.systemMessage(100127)

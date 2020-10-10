@@ -270,8 +270,12 @@ export class RichBaseComponent implements OnInit, OnDestroy{
 	  return (n <= s);
   }
   
+  emptyObject(object){
+	  return (undefined == object || null == object);
+  }
+  
   emptyString(value){
-	  return (undefined == value || null == value || ('' + value).trim() == '');
+	  return (this.emptyObject(value) || ('' + value).trim() == '');
   }
   
   isValidInputAlphaChar(char){

@@ -4,8 +4,7 @@
 	          [auditingExclusions]="auditingExclusions"
 	          [enabledAuditList]="['admin_master','admin','system_auditor'].includes(logged.category)"
 	          (auditListEmitter)="auditList()" (normalListEmitter)="normalList()"
-	          [disabledAddNew]="!(['admin_master'].includes(logged.category))
-	                              && !(['admin'].includes(logged.category) && permissions.includes('image_write'))"
+	          [disabledAddNew]="false"
 	          (addObjectEmitter)="addObject()">
 </form-toolbar>
  
@@ -19,22 +18,6 @@
             	<rich-input-text [formGroup]="dataForm" label="Identificação (*)" 
             	                 titlee="Identificação" maxchars="30" forAlphaNum="true"
             	                 formControlName="name" widthPerc="49" ngDefaultControl>
-                </rich-input-text>
-            	<rich-checkbox widthPerc="100" 
-            	               [noRender]="logged.category != 'admin_master'"
-            	               [breakBefore]="true"
-				               formControlName="forPublic" 
-				               label="Usar no Carrossel na Página Pública Inicial."
-				               ngDefaultControl >
-				</rich-checkbox>
-				<rich-input-text [formGroup]="dataForm" 
-				                 [noRender]="logged.category != 'admin_master'"
-				                 label="Descrição para Carrossel" 
-            	                 maxchars="250" 
-            	                 forAlphaNum="true"
-            	                 formControlName="description" 
-            	                 widthPerc="100" 
-            	                 ngDefaultControl>
                 </rich-input-text>
             	<div class="clear"></div>
         	</div>
@@ -67,9 +50,7 @@
 			            	</button>
 				       		<edit-delete-action [auditingExclusions]="auditingExclusions" 
 				       		                    [object]="image" [logged]="logged"
-				       		                    [noAction]="!(['admin_master'].includes(logged.category))
-			                                                  && !(['admin'].includes(logged.category) 
-			                                                     && permissions.includes('image_write'))"
+				       		                    [noAction]="false"
 				       		                    [objectDeleteConfirmation]="objectDeleteConfirmation" 
 				       		                    [objectUnDeleteConfirmation]="objectUnDeleteConfirmation"
 				       		                    [objectDetail]="objectDetail"
