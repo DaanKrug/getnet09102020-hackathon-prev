@@ -139,6 +139,10 @@ export class BaseCrudService {
 	}
 	
 	getBase(){
+		var mockForRemote = this.storageService.localStorageGetItem('_remote_server_' + this.getAppId());
+		if(mockForRemote == 'true'){
+			return 'https://getnet09102020.skallerten.com.br/getnet09102020/';
+		}
 		return this.storageService.localStorageGetItem('_doc_base_' + this.getAppId());
 	}
 	

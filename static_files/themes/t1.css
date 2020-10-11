@@ -1,0 +1,137 @@
+/* 
+<header> - 522a27
+<background> - f7d488
+<hoverable1> - ceb5a7
+<primarybutton> - 58355e
+<activeborder> -9cb380
+<activebackground> - c59849
+<textcolor1> - fff
+<textcolor2> - 000022
+*/
+
+html, body{
+    background-color: #f7d488 !important;
+}
+.modal-body{
+    background-color: #fff !important;
+}
+.card, .nav-link:hover, .nav-link.active{
+	border: 1px solid #522a27 !important;
+}
+.header, .nav-link.active, .card-header, .modal-header, .wizard-tab{
+    background-color: #522a27 !important;
+}
+.nav-link:hover, .destak,
+.list-group-item-action:hover, .dropdown-item:hover,
+.list-group-item-action:focus, .dropdown-item:focus{
+	color: #000022 !important;
+	background-color: #ceb5a7 !important;
+}
+.nav-link.active, .nav-tabs{
+	border-bottom: 1px solid #522a27 !important;
+}
+.list-group-item.active, 
+.list-group-item.active:hover,
+.list-group-item.active:focus,
+.dropdown-item.active,
+.dropdown-item.active:hover,
+.dropdown-item.active:focus{
+	background-color: #ceb5a7 !important;
+	border-color: #ceb5a7 !important;
+}
+.list-group-item-action:hover, .dropdown-item:hover,
+.list-group-item-action:focus, .dropdown-item:focus{
+    border-color: #ceb5a7 !important;
+}
+.dropdown-item{
+	border-top: 1px solid rgba(0,0,0,.125) !important;
+}
+.nav-link, .nav-link.active:hover, .inputActionIcon, .wizard-tab-inactive{
+    color: #58355e !important;
+}
+.btn-primary {
+    background-color: #58355e !important;
+    border-color: #58355e !important;
+}
+.list-group-item, .list-group-item-action, .dropdown-item,
+.list-group-item.active, .list-group-item-action.active, .dropdown-item.active{
+	color: #000022 !important;
+}
+.table thead th {
+    border-top: 2px solid #dee2e6;
+}
+.table td{
+    border-right: 1px solid #dee2e6;
+}
+.title, .title2 {
+    color: #0f53f4 !important;
+}
+.calendarPickerContent a, .input-group-append a{
+    border: 1px solid #c59849;
+    background: #0069d9;
+}
+form .alert-info {
+    color: #000008;
+}
+.infoLinks .btn-link:hover, .infoLinksTopBack .btn-link:hover,
+.infoLinks .btn-link:focus, .infoLinksTopBack .btn-link:focus{
+    background: #522a27;
+}
+.links > a {
+    color: #636b6f;
+}
+.infoContent h1, .infoContent h2, .infoContent h3, .infoContent h4, .infoContent h5{
+	color: #522a27;
+}
+.infoLinks .btn-link, .infoLinksTopBack .btn-link, 
+.infoLinksNoHover .btn-link, .infoLinksTopBackNoHover .btn-link{
+	color: #0056b3;
+}
+.inputActionIcon:hover, .inputActionIcon:focus{
+	color: #c59849;
+}
+.input-group-text {
+    background-color: #522a27 !important;
+    border-color: #522a27 !important;
+}
+.input-group-text:hover,
+.input-group-text:focus{
+	background-color: #c59849 !important;
+    border-color: #9cb380 !important;
+}
+.input-group-text.disabled,
+.input-group-text:hover.disabled,
+.input-group-text:focus.disabled {
+    background-color: #098bfb !important;
+    border-color: #098bfb !important;
+}
+.header, .header a.nav-link, .top-right > a, .top-left > a, .credits a,
+.infoLinks .btn-link:hover, .infoLinksTopBack .btn-link:hover,
+.infoLinks .btn-link:focus, .infoLinksTopBack .btn-link:focus,
+.calendarPickerContent a, .input-group-append a, .nav-link.active,
+.card-header, .modal-header, .modal-header .close, 
+.input-group-text, .input-group-text .inputActionIcon,
+.btn-outline-info, .btn-outline-info:hover, .btn-outline-info:focus,
+.btn-primary, .btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:not(:disabled):not(.disabled):active, 
+.show > .btn-primary.dropdown-toggle,
+.wizard-tab, .cardheaderButton{
+	color: #fff !important;
+}
+.btn-primary, .btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle{
+	background-color: #c59849;
+    border-color: #9cb380;
+}
+@media only screen and (max-width: 1100px) {
+	.menuTop .btn.btn-link{
+	    color: #fff !important;
+	}
+	.subHeaderMenuTop{
+		border-top: 1px solid #68d3d8 !important;
+		background-color: #522a27 !important;
+	}
+}

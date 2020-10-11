@@ -51,10 +51,11 @@ defmodule ExApp.AuthorizerUtil do
     userPermissions = MapUtil.get(user,:permissions) |> StringUtil.split(",")
     userCategory = MapUtil.get(user,:category)
     noPermission = (length(userPermissions) == 0 or !Enum.member?(userPermissions,permission))
-    autoGenerate = Enum.member?(["project","object","objectfield"],permission)
+    enrollPermissions = Enum.member?(["image_write","product_write"],permission)
     cond do
       (nil == user or nil == permission or MapUtil.get(user,:active) != 1) -> false
-      (userCategory != "admin_master" and (noPermission or autoGenerate)) -> false
+      (userCategory == "enroll" and enrollPermissions) -> true
+      (userCategory != "admin_master" and noPermission) -> false
       (nil == categories or length(categories) == 0) -> true
       true -> Enum.member?(categories,userCategory)
     end

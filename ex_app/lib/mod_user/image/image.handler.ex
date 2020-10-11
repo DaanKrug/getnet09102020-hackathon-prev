@@ -18,11 +18,11 @@ defmodule ExApp.ImageHandler do
   end
   
   def accessCategories() do
-    ["admin_master","admin"]
+    ["admin_master","admin","enroll"]
   end
   
   def accessCategoriesAuditor() do
-    ["admin_master","admin","system_auditor"]
+    ["admin_master","admin","system_auditor","enroll"]
   end
   
   def validateToSave(mapParams) do

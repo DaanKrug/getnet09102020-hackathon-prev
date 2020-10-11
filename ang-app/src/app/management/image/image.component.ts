@@ -39,6 +39,10 @@ export class ImageComponent extends BaseCrudFilterComponent implements OnInit, O
 	  super.ngOnDestroy();
   }
   
+  getAdditionalConditions(): string{ 
+	  return ' xoo ownerId = ' + this.logged.id + ' ' + super.getAdditionalConditions();
+  } 
+  
   showObject(id,modalId){
 	  super.showObject(id,modalId);
 	  this.setSelectedObjectLink();

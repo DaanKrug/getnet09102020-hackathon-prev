@@ -65,6 +65,7 @@
            	    var arr = url.split('//');
            	    sessionStorage.removeItem('_ownerId_' + appId);
            	    sessionStorage.setItem('_token_' + appId,genToken());
+           	    sessionStorage.setItem('_remote_server_' + appId,'false');
            	    sessionStorage.setItem('_doc_base_' + appId,arr[0] + '//' + arr[1].split('/')[0] + '/' + appPrefix);
            	    sessionStorage.setItem('_lastActivity_' + appId,new Date().getTime());
        	    }
