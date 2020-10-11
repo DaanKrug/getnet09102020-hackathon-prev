@@ -49,10 +49,6 @@ defmodule ExApp.ProductController do
     sendResponse(conn,trullyDrop(conn,Handler,AuthHandler,Service,id))
   end
   
-  patch "/load/report" do
-    sendResponse(conn,loadReport(conn,Handler))
-  end
-  
   match _ do
     notFound(conn)
   end

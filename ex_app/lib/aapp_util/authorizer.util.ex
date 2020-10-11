@@ -51,7 +51,7 @@ defmodule ExApp.AuthorizerUtil do
     userPermissions = MapUtil.get(user,:permissions) |> StringUtil.split(",")
     userCategory = MapUtil.get(user,:category)
     noPermission = (length(userPermissions) == 0 or !Enum.member?(userPermissions,permission))
-    enrollPermissions = Enum.member?(["image_write","product_write"],permission)
+    enrollPermissions = Enum.member?(getEnrollEntities(),permission)
     cond do
       (nil == user or nil == permission or MapUtil.get(user,:active) != 1) -> false
       (userCategory == "enroll" and enrollPermissions) -> true
@@ -59,6 +59,12 @@ defmodule ExApp.AuthorizerUtil do
       (nil == categories or length(categories) == 0) -> true
       true -> Enum.member?(categories,userCategory)
     end
+  end
+  
+  defp getEnrollEntities() do
+    ["image_write","image",
+     "product_write","product",
+     "fixedcost_write","fixedcost"]
   end
   
   def getAdditionalConditionsOnLoad(ownerId) do

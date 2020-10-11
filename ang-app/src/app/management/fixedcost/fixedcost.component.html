@@ -3,54 +3,40 @@
 			  (listDataNoCacheEmitter)="listDataNoCache()"
 			  [auditingExclusions]="auditingExclusions"
 			  [enabledAuditList]="['admin_master','admin','system_auditor'].includes(logged.category)"
-	          (auditListEmitter)="auditList()" (normalListEmitter)="normalList()"
+	          (auditListEmitter)="auditList()" 
+	          (normalListEmitter)="normalList()"
 	          [disabledAddNew]="false"
 	          (addObjectEmitter)="addObject()">
 </form-toolbar>
 
 <ng-template [ngIf]="editing" [ngIfElse]="listObjects">
-	<section aria-label="cadastro e alteracao de Produtos" class="dataForm"> 
-		<rich-tab-bar [objects]="tabObjects" 
-		              [selectedTab]="tab" 
-		              (setTabEmitter)="setTab($event)">
-		</rich-tab-bar>
+	<section aria-label="cadastro e alteracao de Custo Fixos" class="dataForm"> 
 		<form [formGroup]="dataForm" (ngSubmit)="onObjectFormSubmit()">   	
-			<div class="{{ tab == 0 ? '' : 'none' }}">	
+			<div >	
 				<rich-input-text [formGroup]="dataForm" 
 				                 label="Identifica&ccedil;&atilde;o (*)" 
 				                 titlee="Identifica&ccedil;&atilde;o"
 				                 maxchars="250"
-				                 formControlName="a2_name" 
-				                 widthPerc="100" 
+				                 formControlName="a1_name" 
+				                 widthPerc="69" 
 				                 placeholderr="" 
 				                 ngDefaultControl>
 				</rich-input-text>
-                <rich-filter-selector id="selectOneCategory" 
-                                      label="Categoria do Produto(*)" 
-                                      emptyLabel="Selecione"
-			                          [selectedObject]="selectedCategory" 
-			                          [objects]="categories" 
-			                          [onlySelect]="true"
-			                          (valueChangedEmitter)="setSelectedCategory($event)" >
-				</rich-filter-selector>
+   				<rich-input-text [formGroup]="dataForm" 
+				                 label="Valor (*)" 
+				                 titlee="Valor" 
+   				                 maskk="0*,00" 
+   				                 preserveSpecialCharacters="true"
+   				                 maxchars="11" 
+   				                 minValue="0" 
+   				                 maxValue="99999999" 
+   				                 forNumber="true"
+   				                 formControlName="a2_value" 
+   				                 widthPerc="29" 
+   				                 ngDefaultControl>
+   				</rich-input-text> 
 				<div class="clear"></div>
 			</div> 
-			<div class="{{ tab == 1 ? '' : 'none' }}">
-				<rich-editor [formGroup]="dataForm" 
-				             formControlName="a3_description" 
-				             ngDefaultControl>
-				</rich-editor>
-			</div>
-			<div class="{{ tab == 2 ? '' : 'none' }}">
-				<rich-image-selector id="selectImage" 
-				                     label="Imagem Para o Produto (*)" 
-				                     emptyLabel="Selecione" 
-					                 [selectedObject]="selectedImage" [objects]="images" 
-					                 [onlySelect]="true"
-					                 (valueChangedEmitter)="setSelectedImage($event)">
-				</rich-image-selector>
-				<div class="clear"></div>
-			</div>
 			<form-action [validationMessages]="validationMessages" 
 			             [processValidation]="processValidation" 
 			             (cancelDataEmitter)="cancelData()">
@@ -60,7 +46,7 @@
 </ng-template>
 
 <ng-template #listObjects>
-	<section aria-label="lista dos Produtos">
+	<section aria-label="lista dos Custo Fixos">
 		<table class="table" *ngIf="objects as listOfObject" mdbTable> 
 			<thead class="black white-text">
 				<tr>
@@ -69,25 +55,26 @@
 					    aria-label="Identifica&ccedil;&atilde;o">
 						Identifica&ccedil;&atilde;o
 					</th>
-					<th scope="col" style="width: 10rem;" 
-					    title="Categoria" 
-					    aria-label="Categoria">
-						Categoria
+					<th scope="col" style="width: 8rem;" 
+					    title="Valor" 
+					    aria-label="Valor">
+						Valor
 					</th>
-					<th scope="col" style="width: 9em;" 
+					<th scope="col" style="width: 7em;" 
 					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
 					<th scope="col" style="width: 5em;" 
 					    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr mdbTableCol *ngFor="let product of objects; trackBy: trackById">
-					<td class="text" [innerHtml]="product.a2_name"></td>
-					<td class="text" [innerHtml]="product.a7_categoryname"></td>
+				<tr mdbTableCol *ngFor="let fixedcost of objects; trackBy: trackById">
+					<td class="text" [innerHtml]="fixedcost.a1_name"></td>
+					<td class="number" [innerHtml]="fixedcost.a2_valueLabel"></td>
 					<td class="actions">
 						<div class="buttons">
 							<edit-delete-action [auditingExclusions]="auditingExclusions" 
-							                    [object]="product" [logged]="logged"
+							                    [object]="fixedcost" 
+							                    [logged]="logged"
 							                    [noAction]="false" 
 							                    (editObjectEmitter)="editObject($event)"
 							                    [objectDetail]="objectDetail" 
@@ -105,7 +92,8 @@
 						<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
 						                 [previousPageDisabled]="previousPageDisabled" 
 						                 [nextPageDisabled]="nextPageDisabled" 
-						                 [rowsPerPage]="rowsPerPage" [totalPages]="totalPages" 
+						                 [rowsPerPage]="rowsPerPage" 
+						                 [totalPages]="totalPages" 
 						                 [totalRows]="totalRows"
 						                 (previousPageEmitter)="previousPage()" 
 						                 (setPageEmitter)="setPage($event)"
@@ -120,45 +108,27 @@
 
 <ng-template #selectedObjectTemplate>
 	<tr>
-		<th scope="row" class="text" style="width: 7em;"
-		    title="Identifica&ccedil;&atilde;o"
-		    aria-label="Identifica&ccedil;&atilde;o">
-			Identifica&ccedil;&atilde;o:
-		</th>
-		<td class="text noBorderRight" 
-		    [innerHtml]="selectedObject.a2_name"></td>
-	</tr>
-	<tr>
-		<th scope="row" class="text"
- 		    title="Categoria"
- 		    aria-label="Categoria">
- 			Categoria:
+		<th scope="row" class="text" style="width: 12em;"
+ 		    title="Identifica&ccedil;&atilde;o"
+ 		    aria-label="Identifica&ccedil;&atilde;o">
+ 			Identifica&ccedil;&atilde;o:
  		</th>
 		<td class="text noBorderRight" 
-		    [innerHtml]="selectedObject.a7_categoryname">
-		</td>
+		    [innerHtml]="selectedObject.a1_name"></td>
 	</tr>
 	<tr>
 		<th scope="row" class="text"
-		    title="Descri&ccedil;&atilde;o"
-		    aria-label="Descri&ccedil;&atilde;o">
-			Descri&ccedil;&atilde;o:
+		    title="Valor"
+		    aria-label="Valor">
+			Valor:
 		</th>
 		<td class="text noBorderRight" 
-		    [innerHtml]="selectedObject.a3_description"></td>
-	</tr>
-	<tr>
-		<td colspan="2" style="padding: 0;" class="noBorderRight">
-			<img id="selectedObjectLink"
-			     src=""
-			     alt="imagem do produto"
-			     style="width: 100%; height: 20em;" />
-		</td>
+		    [innerHtml]="selectedObject.a2_valueLabel"></td>
 	</tr>
 </ng-template>
 
 <ng-template #objectDetail let-modal>
-	<delete-confirmation label="do Produto" 
+	<delete-confirmation label="do Custo Fixo" 
 	                     [selectedObject]="selectedObject" 
 	                     info="true" [templateOutlet]="selectedObjectTemplate" 
 	                     (cancelDataEmitter)="showObject()">
@@ -166,7 +136,7 @@
 </ng-template>
 
 <ng-template #objectDeleteConfirmation let-modal>
-	<delete-confirmation label="Produto" 
+	<delete-confirmation label="Custo Fixo" 
 	                     [selectedObject]="selectedObject" 
 	                     [auditingExclusions]="auditingExclusions" 
 	                     [templateOutlet]="selectedObjectTemplate"
@@ -176,7 +146,7 @@
 </ng-template>
 
 <ng-template #objectUnDeleteConfirmation let-modal>
-	<delete-confirmation label="Produto" 
+	<delete-confirmation label="Custo Fixo" 
 	                     [selectedObject]="selectedObject" 
 	                     redo="true" [auditingExclusions]="auditingExclusions" 
 	                     [templateOutlet]="selectedObjectTemplate"

@@ -90,6 +90,11 @@ const routes: Routes = [
 		  					 .then(m => m.ProductModule), 
 	canActivate: [UserServiceRouter] 
   },
+  { path: 'fixedcosts',
+	loadChildren: () => import('./management/fixedcost/fixedcost.module')
+	  						 .then(m => m.FixedcostModule), 
+	canActivate: [UserServiceRouter] 
+  },
   { path: '**',redirectTo: '/',pathMatch: 'full' }
 ];
 

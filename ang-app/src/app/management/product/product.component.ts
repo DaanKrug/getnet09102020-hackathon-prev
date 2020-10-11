@@ -41,9 +41,6 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 		this.dataForm = new FormGroup({
 			a2_name: new FormControl('', [Validators.required]),
 			a3_description: new FormControl('', [Validators.required])
-		    a8_disponibility: new FormControl('', [Validators.required])
-			a9_deliverytime: new FormControl('', [Validators.required])
-		    a10_sellprice: new FormControl('', [Validators.required])
 		});    
 		super.ngOnInit();
 		this.loadImages();
@@ -70,9 +67,6 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 		this.dataForm.setValue({
 			a2_name: product.a2_name,
 			a3_description: product.a3_description
-			a8_disponibility: product.a8_disponibility,
-			a9_deliverytime: product.a9_deliverytime,
-			a10_sellprice: product.a10_sellprice
 		}); 
 	} 
 	
@@ -180,15 +174,6 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 		if(this.errorRequired('a3_description')){
 			this.addValidationMessage('Descri&ccedil;&atilde;o &eacute; requerido!');
 		}
-		if(this.errorRequired('a8_disponibility')){
-			this.addValidationMessage('Disponibilidade &eacute; requerida!');
-		}
-		if(this.errorRequired('a9_deliverytime')){
-			this.addValidationMessage('Tempo de Entrega (dias) &eacute; requerido!');
-		}
-		if(this.errorRequired('a10_sellprice')){
-			this.addValidationMessage('Preço de Venda &eacute; requerido!');
-		}
 		return !this.inValidationMsgs();
 	}
 
@@ -208,15 +193,6 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 		}
 		if(target == 'a3_description'){
 			this.dataForm.patchValue({a3_description: value});
-		}
-		if(target == 'a8_disponibility'){
-			this.dataForm.patchValue({a8_disponibility: value});
-		}
-		if(target == 'a9_deliverytime'){
-			this.dataForm.patchValue({a9_deliverytime: value});
-		}
-		if(target == 'a10_sellprice'){
-			this.dataForm.patchValue({a10_sellprice: value});
 		}
    	} 
 	

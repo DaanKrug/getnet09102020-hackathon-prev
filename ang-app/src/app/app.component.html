@@ -212,6 +212,12 @@
 								                      (clickEmitter)="imagesView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
+								<rich-dropdown-button label="Custo Fixos" 
+								                      [activated]="view == 'fixedcosts'" 
+								                      [noRender]="!fullButtonsManager"
+								                      (clickEmitter)="fixedcostsView()"
+								                      (clickEmitter1)="drd2.close()">
+								</rich-dropdown-button>
 								<rich-dropdown-button label="Produtos" 
 						    	                      [activated]="view == 'products'" 
 						    	                      [noRender]="!fullButtonsManager"
@@ -309,6 +315,11 @@
 						    	<rich-menu-button label="Imagens" 
 						    	                  (clickEmitter)="imagesView()" 
 								                  [activated]="view == 'images'" 
+								                  [noRender]="!fullButtonsManager">
+								</rich-menu-button>
+								<rich-menu-button label="Custo Fixos" 
+								                  (clickEmitter)="fixedcostsView()" 
+								                  [activated]="view == 'fixedcosts'" 
 								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
 								<rich-menu-button label="Produtos" 

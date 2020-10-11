@@ -262,6 +262,8 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	
 	productsView(){ this.navigateTo('products','Produtos'); }
 	
+	fixedcostsView(){ this.navigateTo('fixedcosts','Custo Fixos'); }
+	
 	applogsView(){ this.navigateTo('applogs','Logs da Aplica&ccedil;&atilde;o'); }
 	
     login(){

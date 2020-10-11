@@ -36,19 +36,4 @@ defmodule ExApp.ProductValidator do
     SanitizerUtil.sanitizeAll(value,false,true,250,"A-z0-9")
   end
   
-  def getA8_disponibility(mapParams,defaultValue \\ nil) do
-    value = StringUtil.coalesce(MapUtil.get(mapParams,:a8_disponibility),defaultValue)
-    NumberUtil.toInteger(SanitizerUtil.sanitizeAll(value,true,true,10,nil))
-  end
-  
-  def getA9_deliverytime(mapParams,defaultValue \\ nil) do
-    value = StringUtil.coalesce(MapUtil.get(mapParams,:a9_deliverytime),defaultValue)
-    NumberUtil.toInteger(SanitizerUtil.sanitizeAll(value,true,true,2,nil))
-  end
-  
-  def getA10_sellprice(mapParams,defaultValue \\ nil) do
-    value = StringUtil.coalesce(MapUtil.get(mapParams,:a10_sellprice),defaultValue)
-    NumberUtil.toFloat(SanitizerUtil.sanitizeAll(value,true,true,11,nil))
-  end
-  
 end

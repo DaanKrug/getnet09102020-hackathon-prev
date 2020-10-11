@@ -92,10 +92,7 @@ CREATE TABLE `product` (
      `a4_imageid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
      `a5_imagelink` text COLLATE utf8mb4_general_ci DEFAULT NULL,
      `a6_categoryid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-     `a7_categoryname` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL,
-     `a8_disponibility` int(10) UNSIGNED NOT NULL DEFAULT 0,
-     `a9_deliverytime` int(2) UNSIGNED NOT NULL DEFAULT 0,
-     `a10_sellprice` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0,
+     `a7_categoryname` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL
      `ownerId` bigint(20) UNSIGNED NOT NULL,
      `created_at` timestamp NULL DEFAULT NULL,
      `updated_at` timestamp NULL DEFAULT NULL,
@@ -105,3 +102,24 @@ CREATE TABLE `product` (
 ALTER TABLE `product` ADD PRIMARY KEY (`id`);
    
 ALTER TABLE `product` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+
+
+CREATE TABLE `fixedcost` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a2_value` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `fixedcost` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `fixedcost` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+
+

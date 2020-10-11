@@ -8,9 +8,6 @@ export class Product {
 		public a5_imagelink: number,
 		public a6_categoryid: number,
 		public a7_categoryname: string,
-		public a8_disponibility: number,
-		public a9_deliverytime: number,
-		public a10_sellprice: number,
 		public ownerId: number,
 		public _token: string,
 		public objectClass: string

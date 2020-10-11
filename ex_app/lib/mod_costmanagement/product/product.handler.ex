@@ -77,15 +77,11 @@ defmodule ExApp.ProductHandler do
     a5_imagelink = ProductValidator.getA5_imagelink(mapParams)
     a6_categoryid = ProductValidator.getA6_categoryid(mapParams)
     a7_categoryname = ProductValidator.getA7_categoryname(mapParams)
-    a8_disponibility = ProductValidator.getA8_disponibility(mapParams)
-    a9_deliverytime = ProductValidator.getA9_deliverytime(mapParams)
-    a10_sellprice = ProductValidator.getA10_sellprice(mapParams)
 	ownerId = GenericValidator.getOwnerId(mapParams)
-	params = [a2_name,a3_description,a4_imageid,a5_imagelink,a6_categoryid,a7_categoryname,
-	          a8_disponibility,a9_deliverytime,a10_sellprice,ownerId]
+	params = [a2_name,a3_description,a4_imageid,a5_imagelink,
+	          a6_categoryid,a7_categoryname,ownerId]
 	newObject = Product.new(0,a2_name,a3_description,a4_imageid,a5_imagelink,
-	                        a6_categoryid,a7_categoryname,a8_disponibility,
-	                        a9_deliverytime,a10_sellprice,ownerId)
+	                        a6_categoryid,a7_categoryname,ownerId)
     cond do
       (!(ProductService.create(params))) 
         -> MessagesUtil.systemMessage(100305)
@@ -100,11 +96,7 @@ defmodule ExApp.ProductHandler do
     a5_imagelink = ProductValidator.getA5_imagelink(mapParams,MapUtil.get(product,:a5_imagelink))
     a6_categoryid = ProductValidator.getA6_categoryid(mapParams,MapUtil.get(product,:a6_categoryid))
     a7_categoryname = ProductValidator.getA7_categoryname(mapParams,MapUtil.get(product,:a7_categoryname))
-    a8_disponibility = ProductValidator.getA8_disponibility(mapParams,MapUtil.get(product,:a8_disponibility))
-    a9_deliverytime = ProductValidator.getA9_deliverytime(mapParams,MapUtil.get(product,:a9_deliverytime))
-    a10_sellprice = ProductValidator.getA10_sellprice(mapParams,MapUtil.get(product,:a10_sellprice))
-    params = [a2_name,a3_description,a4_imageid,a5_imagelink,a6_categoryid,a7_categoryname,
-              a8_disponibility,a9_deliverytime,a10_sellprice]
+    params = [a2_name,a3_description,a4_imageid,a5_imagelink,a6_categoryid,a7_categoryname]
     cond do
       (!(ProductService.update(id,params))) 
         -> MessagesUtil.systemMessage(100306)

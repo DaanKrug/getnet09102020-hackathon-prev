@@ -14,7 +14,7 @@ export class ProductService extends BaseCrudService {
 	getEmptyObject(conditions) :Object{
 		var ownerId: number = parseInt('0' + this.storageService.localStorageGetItem('_ownerId_' + this.getAppId()));
 		return new Product(0,conditions,
-		                   null,null,0,null,0,null,0,0,0,
+		                   null,null,0,null,0,null,
 		                   ownerId,
 		                   this.storageService.localStorageGetItem('_token_' + this.getAppId()),null);
 	}
@@ -34,19 +34,8 @@ export class ProductService extends BaseCrudService {
 		object.a5_imagelink = super.getChangedValue(anotherObject.a5_imagelink,object.a5_imagelink); 
 		object.a6_categoryid = super.getChangedValue(anotherObject.a6_categoryid,object.a6_categoryid); 
 		object.a7_categoryname = super.getChangedValue(anotherObject.a7_categoryname,object.a7_categoryname);
-		object.a8_disponibility = super.getChangedValue(anotherObject.a8_disponibility,object.a8_disponibility);
-		object.a9_deliverytime = super.getChangedValue(anotherObject.a9_deliverytime,object.a9_deliverytime);
-		object.a10_sellprice = super.getChangedValue(anotherObject.a10_sellprice,object.a10_sellprice);
 		object.ownerId = super.getChangedValue(anotherObject.ownerId,object.ownerId);
 		return object;
 	}
 
 }
-
-
-
-
-
-
-
-

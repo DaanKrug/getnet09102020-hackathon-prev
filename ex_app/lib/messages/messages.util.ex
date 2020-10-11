@@ -1137,6 +1137,10 @@ defmodule ExApp.MessagesUtil do
                                  <strong>Categoria Produto</strong> em questão não pode ser excluída 
                                  pois está vinculada à produto(s).
                                  """)
+      (messageCode == 100311) -> ReturnUtil.getValidationResult(100311,
+                                 "Falha ao criar <strong>Custo Fixo</strong>.")
+      (messageCode == 100312) -> ReturnUtil.getValidationResult(100312,
+                                 "Falha ao alterar <strong>Custo Fixo</strong>.")
       true -> systemMessage(0)
     end
   end
