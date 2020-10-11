@@ -95,6 +95,11 @@ const routes: Routes = [
 	  						 .then(m => m.FixedcostModule), 
 	canActivate: [UserServiceRouter] 
   },
+  { path: 'supplys',
+    loadChildren: () => import('./management/supply/supply.module')
+		  				     .then(m => m.SupplyModule), 
+    canActivate: [UserServiceRouter] 
+  },
   { path: '**',redirectTo: '/',pathMatch: 'full' }
 ];
 

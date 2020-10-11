@@ -64,7 +64,8 @@ defmodule ExApp.AuthorizerUtil do
   defp getEnrollEntities() do
     ["image_write","image",
      "product_write","product",
-     "fixedcost_write","fixedcost"]
+     "fixedcost_write","fixedcost",
+     "supply_write","supply"]
   end
   
   def getAdditionalConditionsOnLoad(ownerId) do

@@ -22,6 +22,7 @@ defmodule ExApp.Endpoint do
   alias ExApp.CcategoryproductController
   alias ExApp.ProductController
   alias ExApp.FixedcostController
+  alias ExApp.SupplyController
   
   
   plug(Plug.Logger, log: :debug)
@@ -46,6 +47,7 @@ defmodule ExApp.Endpoint do
   forward("/ccategoryproducts",                to: CcategoryproductController)
   forward("/products",                         to: ProductController)
   forward("/fixedcosts",                       to: FixedcostController)
+  forward("/supplys",                          to: SupplyController)
   
   match _ do
     host = MapUtil.get(conn,:host)

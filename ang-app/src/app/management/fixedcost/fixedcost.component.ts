@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BaseCrudFilterComponent } from '../../base/basecrudfilter.component';
 
-import { FixedcostService } from './fixedcost.service';
 
 @Component({
 	selector: 'fixedcost-root',
@@ -13,16 +12,9 @@ import { FixedcostService } from './fixedcost.service';
 })
 export class FixedcostComponent extends BaseCrudFilterComponent implements OnInit, OnDestroy{
 
-	   
-   	fixedcostService: FixedcostService;
-
 	ngOnInit() {
-   		this.fixedcostService = new FixedcostService(this.http);
-   		this.fixedcostService.setStorageService(this.storageService);
-   		this.fixedcostService.setCacheDataService(this.cacheDataService);
-   		this.fixedcostService.setMeta(this.meta);
+   		this.setInitializationServices(['fixedcost']);
    		this.crudService = this.fixedcostService;
-   		this.setInitializationServices([]);
    		this.sucessErrorMessages = {
 			200:  'Custo Fixo adicionado com sucesso.',
 			201:  'Custo Fixo alterado com sucesso.',
@@ -32,7 +24,7 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 			207:  'Custo Fixo restaurado com sucesso.',
 			208:  'Custo Fixo exclu&iacute;do [PERMANENTE] com sucesso.'
 		}; 
-		this.listTitle = 'Custo Fixos';
+		this.listTitle = 'Custos Fixos';
 		this.addTitle = 'Adicionar Custo Fixo';
 		this.editTitle = 'Editar Custo Fixo';
 		this.dataForm = new FormGroup({
@@ -47,8 +39,6 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 	}
 
 	ngOnDestroy(){    
-		this.fixedcostService.ngOnDestroy();
-		this.fixedcostService = null;
 		super.ngOnDestroy();
 	}
 

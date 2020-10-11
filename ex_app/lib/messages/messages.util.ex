@@ -1141,6 +1141,10 @@ defmodule ExApp.MessagesUtil do
                                  "Falha ao criar <strong>Custo Fixo</strong>.")
       (messageCode == 100312) -> ReturnUtil.getValidationResult(100312,
                                  "Falha ao alterar <strong>Custo Fixo</strong>.")
+      (messageCode == 100313) -> ReturnUtil.getValidationResult(100313,
+                                 "Falha ao criar <strong>Insumo</strong>.")
+      (messageCode == 100314) -> ReturnUtil.getValidationResult(100314,
+                                 "Falha ao alterar <strong>Insumo</strong>.")
       true -> systemMessage(0)
     end
   end

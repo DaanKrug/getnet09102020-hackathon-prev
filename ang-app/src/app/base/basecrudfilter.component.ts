@@ -30,6 +30,8 @@ import { UserService } from '../management/user/user.service';
 import { ImageService } from '../management/image/image.service';
 import { FileService } from '../management/file/file.service';
 import { ProductService } from '../management/product/product.service';
+import { FixedcostService } from '../management/fixedcost/fixedcost.service';
+import { SupplyService } from '../management/supply/supply.service';
 
 
 export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit, OnDestroy{
@@ -45,9 +47,10 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
     imageService: ImageService;
     fileService: FileService;
     productService: ProductService;
+	fixedcostService: FixedcostService;
+	supplyService: SupplyService;
 
     modulesNames: string[];
-    themes: Object[];
     activatedServices: any[];
     signedVariables: any[];
 
@@ -227,29 +230,15 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
         	this.productService = new ProductService(this.http);
       	    this.injectServiceDependencies(this.productService);
         }
+        if(toAactivateServices.includes('fixedcost')){
+        	this.fixedcostService = new FixedcostService(this.http);
+      	    this.injectServiceDependencies(this.fixedcostService);
+        }
+        if(toAactivateServices.includes('supply')){
+        	this.supplyService = new SupplyService(this.http);
+      	    this.injectServiceDependencies(this.supplyService);
+        }
         
-        
-        
-        // generic objects
-		this.themes = [
-			{value: 'blue01' , label: 'Azul 01'},
-		    {value: 'blue02' , label: 'Azul 02'},
-		    {value: 'blue03' , label: 'Azul 03'},
-		    {value: 'blue04' , label: 'Azul 04'},
-		    {value: 'dark01' , label: 'Dark 01'},
-		    {value: 'dark02' , label: 'Dark 02'},
-		    {value: 'dark03' , label: 'Dark 03'},
-		    {value: 'dark04' , label: 'Dark 04'},
-		    {value: 'dark05' , label: 'Dark 05'},
-		    {value: 'green01' , label: 'Verde 01'},
-		    {value: 'green02' , label: 'Verde 02'},
-		    {value: 'green03' , label: 'Verde 03'},
-		    {value: 'orkut' , label: 'Orkut'},
-		    {value: 'red01' , label: 'Vermelho 01'},
-		    {value: 'red02' , label: 'Vermelho 02'},
-		    {value: 'red03' , label: 'Vermelho 03'}
-		];
-		this.addSignedVariables([this.themes]);
 		this.servicesInitialized = true;
 	}
 	

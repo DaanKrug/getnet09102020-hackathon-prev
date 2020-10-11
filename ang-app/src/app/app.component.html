@@ -212,10 +212,16 @@
 								                      (clickEmitter)="imagesView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
-								<rich-dropdown-button label="Custo Fixos" 
+								<rich-dropdown-button label="Custos Fixos" 
 								                      [activated]="view == 'fixedcosts'" 
 								                      [noRender]="!fullButtonsManager"
 								                      (clickEmitter)="fixedcostsView()"
+								                      (clickEmitter1)="drd2.close()">
+								</rich-dropdown-button>
+								<rich-dropdown-button label="Insumos" 
+								                      [activated]="view == 'supplys'" 
+								                      [noRender]="!fullButtonsManager"
+								                      (clickEmitter)="supplysView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
 								<rich-dropdown-button label="Produtos" 
@@ -317,9 +323,14 @@
 								                  [activated]="view == 'images'" 
 								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
-								<rich-menu-button label="Custo Fixos" 
+								<rich-menu-button label="Custos Fixos" 
 								                  (clickEmitter)="fixedcostsView()" 
 								                  [activated]="view == 'fixedcosts'" 
+								                  [noRender]="!fullButtonsManager">
+								</rich-menu-button>
+								<rich-menu-button label="Insumos" 
+								                  (clickEmitter)="supplysView()" 
+								                  [activated]="view == 'supplys'" 
 								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
 								<rich-menu-button label="Produtos" 

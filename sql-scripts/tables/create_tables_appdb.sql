@@ -123,3 +123,20 @@ ALTER TABLE `fixedcost` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 
 
+CREATE TABLE `supply` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a2_value` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `supply` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `supply` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+
+

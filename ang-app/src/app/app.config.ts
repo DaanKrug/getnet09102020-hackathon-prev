@@ -1,9 +1,9 @@
 export class AppConfig {
 	
 	static authViews = [
-		'home','mailerconfigs','modules','appthemes','appconfigs','s3configs',
+		'home','mailerconfigs','modules','appconfigs','s3configs',
 		'simplemails','users','applogs','images','files','categoryproducts',
-		'products','fixedcosts'
+		'products','fixedcosts','supplys',
 	];
 	static categories = [
 		['modules',                                ['admin_master']],
@@ -18,6 +18,7 @@ export class AppConfig {
 		['images',                                 ['admin_master','admin','system_auditor','enroll']],
 		['products',                               ['admin_master','admin','system_auditor','enroll']],
 		['fixedcosts',                             ['admin_master','admin','system_auditor','enroll']],
+		['supplys',                                ['admin_master','admin','system_auditor','enroll']],
     ];
 	
 }
