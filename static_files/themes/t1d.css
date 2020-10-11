@@ -1,10 +1,8 @@
-/* https://coolors.co/0a2463-3e92cc-fffaff-d8315b-1e1b18 */
-
 /* 
 <header> - D8315B
 <background> - fffaff
 <hoverable1> - ceb5a7
-<primarybutton> - ec0c45
+<primarybutton> - 3E92CC
 <activeborder> -9cb380
 <activebackground> - c59849
 <textcolor1> - fff
@@ -49,11 +47,11 @@ html, body{
 	border-top: 1px solid rgba(0,0,0,.125) !important;
 }
 .nav-link, .nav-link.active:hover, .inputActionIcon, .wizard-tab-inactive{
-    color: #ec0c45 !important;
+    color: #3E92CC !important;
 }
 .btn-primary {
-    background-color: #ec0c45 !important;
-    border-color: #ec0c45 !important;
+    background-color: #3E92CC !important;
+    border-color: #3E92CC !important;
 }
 .list-group-item, .list-group-item-action, .dropdown-item,
 .list-group-item.active, .list-group-item-action.active, .dropdown-item.active{

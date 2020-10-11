@@ -28,6 +28,9 @@ defmodule ExApp.ProductService do
           a5_imagelink,
           a6_categoryid,
           a7_categoryname,
+          a8_disponibility,
+          a9_deliverytime,
+          a10_sellprice,
           ownerId from product where id = ? limit 1
 	      """
 	resultset = DAOService.load(sql,[id])
@@ -45,7 +48,10 @@ defmodule ExApp.ProductService do
           a5_imagelink,
           a6_categoryid,
           a7_categoryname,
-          ownerId,created_at) values (?,?,?,?,?,?,?,?)
+          a8_disponibility,
+          a9_deliverytime,
+          a10_sellprice,
+          ownerId,created_at) values (?,?,?,?,?,?,?,?,?,?)
 	      """
     DAOService.insert(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false)])
   end
@@ -58,6 +64,9 @@ defmodule ExApp.ProductService do
           a5_imagelink = ?,
           a6_categoryid = ?,
           a7_categoryname = ?,
+          a8_disponibility = ?,
+          a9_deliverytime = ?,
+          a10_sellprice = ?,
           updated_at = ? where id = ?
 	      """
     DAOService.update(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false),id])
@@ -83,6 +92,9 @@ defmodule ExApp.ProductService do
           a5_imagelink,
           a6_categoryid,
           a7_categoryname,
+          a8_disponibility,
+          a9_deliverytime,
+          a10_sellprice,
           ownerId from product 
           where #{deletedAt} #{conditions} 
           order by id asc
@@ -91,7 +103,7 @@ defmodule ExApp.ProductService do
     resultset = DAOService.load(sql,[])
     cond do
       (nil == resultset or resultset.num_rows == 0) 
-        -> [Product.new(0,nil,nil,0,nil,0,nil,0,0)]
+        -> [Product.new(0,nil,nil,0,nil,0,nil,0,0,0,0,0)]
       true -> parseResults(resultset,total,[],0) 
     end
   end
@@ -112,6 +124,9 @@ defmodule ExApp.ProductService do
           a5_imagelink,
           a6_categoryid,
           a7_categoryname,
+          a8_disponibility,
+          a9_deliverytime,
+          a10_sellprice,
           0 as ownerId from product 
           where #{deletedAt} #{conditions} 
           order by id asc
@@ -120,7 +135,7 @@ defmodule ExApp.ProductService do
     resultset = DAOService.load(sql,[])
     cond do
       (nil == resultset or resultset.num_rows == 0) 
-        -> [Product.new(0,nil,nil,0,nil,0,nil,0,0)]
+        -> [Product.new(0,nil,nil,0,nil,0,nil,0,0,0,0,0)]
       true -> parseResults(resultset,total,[],0) 
     end
   end
@@ -159,6 +174,9 @@ defmodule ExApp.ProductService do
                 NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,5)),
                 ResultSetHandler.getColumnValue(resultset,row,6),
                 NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,7)),
+                NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,8)),
+                NumberUtil.toFloat(ResultSetHandler.getColumnValue(resultset,row,9)),
+                NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,10)),
                 total)
   end
   

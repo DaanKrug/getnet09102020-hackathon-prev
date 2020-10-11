@@ -1,10 +1,8 @@
-/* https://coolors.co/0a2463-3e92cc-fffaff-d8315b-1e1b18 */
-
 /* 
-<header> - D8315B
+<header> - 3292cc
 <background> - fffaff
 <hoverable1> - ceb5a7
-<primarybutton> - ec0c45
+<primarybutton> - d8315b
 <activeborder> -9cb380
 <activebackground> - c59849
 <textcolor1> - fff
@@ -18,10 +16,10 @@ html, body{
     background-color: #fff !important;
 }
 .card, .nav-link:hover, .nav-link.active{
-	border: 1px solid #D8315B !important;
+	border: 1px solid #3292cc !important;
 }
 .header, .nav-link.active, .card-header, .modal-header, .wizard-tab{
-    background-color: #D8315B !important;
+    background-color: #3292cc !important;
 }
 .nav-link:hover, .destak,
 .list-group-item-action:hover, .dropdown-item:hover,
@@ -30,7 +28,7 @@ html, body{
 	background-color: #ceb5a7 !important;
 }
 .nav-link.active, .nav-tabs{
-	border-bottom: 1px solid #D8315B !important;
+	border-bottom: 1px solid #3292cc !important;
 }
 .list-group-item.active, 
 .list-group-item.active:hover,
@@ -49,11 +47,11 @@ html, body{
 	border-top: 1px solid rgba(0,0,0,.125) !important;
 }
 .nav-link, .nav-link.active:hover, .inputActionIcon, .wizard-tab-inactive{
-    color: #ec0c45 !important;
+    color: #d8315b !important;
 }
 .btn-primary {
-    background-color: #ec0c45 !important;
-    border-color: #ec0c45 !important;
+    background-color: #d8315b !important;
+    border-color: #d8315b !important;
 }
 .list-group-item, .list-group-item-action, .dropdown-item,
 .list-group-item.active, .list-group-item-action.active, .dropdown-item.active{
@@ -77,13 +75,13 @@ form .alert-info {
 }
 .infoLinks .btn-link:hover, .infoLinksTopBack .btn-link:hover,
 .infoLinks .btn-link:focus, .infoLinksTopBack .btn-link:focus{
-    background: #D8315B;
+    background: #3292cc;
 }
 .links > a {
     color: #636b6f;
 }
 .infoContent h1, .infoContent h2, .infoContent h3, .infoContent h4, .infoContent h5{
-	color: #D8315B;
+	color: #3292cc;
 }
 .infoLinks .btn-link, .infoLinksTopBack .btn-link, 
 .infoLinksNoHover .btn-link, .infoLinksTopBackNoHover .btn-link{
@@ -93,8 +91,8 @@ form .alert-info {
 	color: #c59849;
 }
 .input-group-text {
-    background-color: #D8315B !important;
-    border-color: #D8315B !important;
+    background-color: #3292cc !important;
+    border-color: #3292cc !important;
 }
 .input-group-text:hover,
 .input-group-text:focus{
@@ -134,6 +132,6 @@ form .alert-info {
 	}
 	.subHeaderMenuTop{
 		border-top: 1px solid #68d3d8 !important;
-		background-color: #D8315B !important;
+		background-color: #3292cc !important;
 	}
 }

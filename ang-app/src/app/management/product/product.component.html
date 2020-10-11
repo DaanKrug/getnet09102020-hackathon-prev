@@ -33,6 +33,41 @@
 			                          [onlySelect]="true"
 			                          (valueChangedEmitter)="setSelectedCategory($event)" >
 				</rich-filter-selector>
+				<rich-input-text [formGroup]="dataForm" 
+				                 label="Disponibilidade (*)" 
+				                 titlee="Disponibilidade" 
+            	                 maxchars="10" 
+            	                 minValue="0" 
+            	                 maxValue="4294967295" 
+            	                 forNumber="true"
+            	                 formControlName="a8_disponibility" 
+            	                 widthPerc="33" 
+            	                 ngDefaultControl>
+                </rich-input-text>
+                <rich-input-text [formGroup]="dataForm" 
+				                 label="Tempo de Entrega (dias) (*)" 
+				                 titlee="Tempo de Entrega (dias)" 
+            	                 maxchars="2" 
+            	                 minValue="0" 
+            	                 maxValue="99" 
+            	                 forNumber="true"
+            	                 formControlName="a9_deliverytime" 
+            	                 widthPerc="33" 
+            	                 ngDefaultControl>
+                </rich-input-text>
+            	<rich-input-text [formGroup]="dataForm" 
+            	                 label="Preço de Venda (*)" 
+            	                 titlee="Preço de Venda" 
+            	                 maxchars="11" 
+            	                 minValue="0"
+            	                 maxValue="99999999" 
+            	                 forNumber="true"
+            	                 maskk="0*,00"
+            	                 preserveSpecialCharacters="true"
+            	                 formControlName="a10_sellprice" 
+            	                 widthPerc="33" 
+            	                 ngDefaultControl>
+                </rich-input-text>
 				<div class="clear"></div>
 			</div> 
 			<div class="{{ tab == 1 ? '' : 'none' }}">
@@ -74,7 +109,7 @@
 					    aria-label="Categoria">
 						Categoria
 					</th>
-					<th scope="col" style="width: 7em;" 
+					<th scope="col" style="width: 9em;" 
 					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
 					<th scope="col" style="width: 5em;" 
 					    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>

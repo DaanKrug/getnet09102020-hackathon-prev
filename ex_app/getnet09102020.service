@@ -1,0 +1,13 @@
+[Unit]
+Description=Get Net 09 10 2020 App in Elixir/Erlang
+After=mysql.service
+
+[Service]
+Environment="MIX_ENV=prod" "HOME=/var/www/html/getnet09102020/ex_app/compiled_getnet09102020/ex_app/bin"
+ExecStart=/usr/local/bin/getnet09102020_startup.sh
+ExecStop=/usr/local/bin/getnet09102020_shutdown.sh
+RemainAfterExit=yes
+
+[Install]
+# WantedBy=default.target
+WantedBy=multi-user.target
