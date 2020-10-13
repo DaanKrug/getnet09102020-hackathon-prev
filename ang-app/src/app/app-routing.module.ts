@@ -100,6 +100,16 @@ const routes: Routes = [
 		  				     .then(m => m.SupplyModule), 
     canActivate: [UserServiceRouter] 
   },
+  { path: 'supplyproducts',
+	loadChildren: () => import('./management/supplyproduct/supplyproduct.module')
+	  						 .then(m => m.SupplyproductModule), 
+	canActivate: [UserServiceRouter] 
+  },
+  { path: 'handcashs',
+	loadChildren: () => import('./management/handcash/handcash.module')
+	  						 .then(m => m.HandcashModule), 
+	canActivate: [UserServiceRouter] 
+  },
   { path: '**',redirectTo: '/',pathMatch: 'full' }
 ];
 

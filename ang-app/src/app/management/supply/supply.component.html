@@ -18,7 +18,7 @@
 				                 titlee="Identifica&ccedil;&atilde;o"
 				                 maxchars="250"
 				                 formControlName="a1_name" 
-				                 widthPerc="69" 
+				                 widthPerc="39" 
 				                 placeholderr="" 
 				                 ngDefaultControl>
 				</rich-input-text>
@@ -35,6 +35,13 @@
    				                 widthPerc="29" 
    				                 ngDefaultControl>
    				</rich-input-text> 
+   				<rich-input-select label="Unidade Medida (*)" 
+   				                   titlee="U. M." 
+   				                   [objects]="units" 
+                                   formControlName="a3_un" 
+                                   widthPerc="19" 
+                                   ngDefaultControl>
+                </rich-input-select>
 				<div class="clear"></div>
 			</div> 
 			<form-action [validationMessages]="validationMessages" 
@@ -60,6 +67,11 @@
 					    aria-label="Valor Unitário">
 						Valor Unitário
 					</th>
+					<th scope="col" style="width: 4rem;" 
+					    title="Unidade Medida" 
+					    aria-label="Unidade Medida">
+						U.M.
+					</th>
 					<th scope="col" style="width: 7em;" 
 					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
 					<th scope="col" style="width: 5em;" 
@@ -70,6 +82,7 @@
 				<tr mdbTableCol *ngFor="let supply of objects; trackBy: trackById">
 					<td class="text" [innerHtml]="supply.a1_name"></td>
 					<td class="number" [innerHtml]="supply.a2_valueLabel"></td>
+					<td class="number" [innerHtml]="supply.a3_un"></td>
 					<td class="actions">
 						<div class="buttons">
 							<edit-delete-action [auditingExclusions]="auditingExclusions" 
@@ -88,8 +101,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3" class="navigationBottom">
-						<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
+					<td colspan="4" class="navigationBottom">
+						<table-navigator [pages]="pages" 
+						                 [selectedPage]="selectedPage" 
 						                 [previousPageDisabled]="previousPageDisabled" 
 						                 [nextPageDisabled]="nextPageDisabled" 
 						                 [rowsPerPage]="rowsPerPage" 
@@ -125,6 +139,17 @@
 		<td class="text noBorderRight" 
 		    [innerHtml]="selectedObject.a2_valueLabel"></td>
 	</tr>
+	<tr>
+		<th scope="row" 
+		    class="text"
+		    title="Unidade Medida"
+		    aria-label="Unidade Medida">
+			Unidade Medida:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a3_un"></td>
+	</tr>
+	
 </ng-template>
 
 <ng-template #objectDetail let-modal>

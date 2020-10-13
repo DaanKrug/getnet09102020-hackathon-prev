@@ -86,8 +86,19 @@
 					<td class="text" [innerHtml]="product.a7_categoryname"></td>
 					<td class="actions">
 						<div class="buttons">
+							<button class="btn btn-primary clickable" 
+							        type="button" 
+							        *ngIf="!auditingExclusions"
+				       				placement="left" 
+				       				ngbTooltip="Adicionar Insumos" 
+				       				aria-label="Adicionar Insumos" 
+				       		        (click)="toSupplys(product.id);"
+				       		        style="width: 1.6rem;">
+				       			<i class="far fa-list-alt"></i>
+				       		</button>
 							<edit-delete-action [auditingExclusions]="auditingExclusions" 
-							                    [object]="product" [logged]="logged"
+							                    [object]="product" 
+							                    [logged]="logged"
 							                    [noAction]="false" 
 							                    (editObjectEmitter)="editObject($event)"
 							                    [objectDetail]="objectDetail" 

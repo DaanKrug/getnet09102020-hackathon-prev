@@ -35,6 +35,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
     userButtonsManager: boolean;
     applogButtonsManager: boolean;
     verifyActivityInterval: any;
+    products: any;
 
 	ngOnInit() {
 		this.sucessErrorMessages = {
@@ -43,7 +44,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	    };
 		this.cacheDataService.start(15);
 		this.messageEmitterService = null;
-		this.setInitializationServices(['user','module','appconfig']);
+		this.setInitializationServices(['user','module','appconfig','product']);
 		this.crudService = this.userService;
 		this.registerSubscriptions();
 		this.viewTitleSeparator = '<i class="fas fa-chevron-right viewTitleSeparator"></i>';
@@ -55,6 +56,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		this.setMainPageNumber(0);
 		this.loadConfig();
 		this.loadModules();
+		this.loadProducts();
 	}
 	
 	ngOnDestroy(){
@@ -69,6 +71,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		this.fullButtonsManager = null;
 		this.userButtonsManager = null;
 		this.applogButtonsManager = null;
+		this.products = null;
 		clearInterval(this.verifyActivityInterval);
 	  	this.verifyActivityInterval = null;
 	}
@@ -102,7 +105,17 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
                                       .subscribe(data => {this.loadModules();});
 		this.subscriptions[i++] = this.eventEmitterService.get('mainpage')
                                       .subscribe(data => {this.mainpageView();});
-		
+		this.subscriptions[i++] = this.eventEmitterService.get('products')
+                                      .subscribe(data => {this.productsView();});
+		this.subscriptions[i++] = this.eventEmitterService.get('supplyproducts')
+		                              .subscribe(data => {this.supplyproductsView(data.object);});
+	}
+	
+	loadProducts(){
+		this.productService.invalidateCache();
+		this.productService.getAll(-1,-1,null).then(products => {
+			this.products = this.clearRowZeroObjectsValidated(products);
+		});
 	}
 	
 	loadConfig(){
@@ -264,7 +277,21 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	
 	fixedcostsView(){ this.navigateTo('fixedcosts','Custo Fixos'); }
 	
+	handcashsView(){ this.navigateTo('handcashs','Calcular Lucro'); }
+	
 	supplysView(){ this.navigateTo('supplys','Insumos'); }
+	
+	supplyproductsView(product){ 
+		if(this.emptyObject(product)){
+			return;
+		}
+		this.storageService.clear();
+		this.storageService.put(product);
+		var title = 'Produto: ' + product.a2_name;
+		title += this.viewTitleSeparator;
+		title += 'Insumos';
+		this.navigateTo('supplyproducts',title); 
+	}
 	
 	applogsView(){ this.navigateTo('applogs','Logs da Aplica&ccedil;&atilde;o'); }
 	
@@ -439,5 +466,9 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		this.cacheDataService.reset();
 		window.location.reload();
 	}
+	
+	// this.storageService.localStorageSetItem('_networking_preferences_' + this.getAppId(),preferences,true);
+	
+	
 	
 }

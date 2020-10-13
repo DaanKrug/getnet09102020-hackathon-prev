@@ -65,7 +65,9 @@ defmodule ExApp.AuthorizerUtil do
     ["image_write","image",
      "product_write","product",
      "fixedcost_write","fixedcost",
-     "supply_write","supply"]
+     "supply_write","supply",
+     "supplyproduct_write","supplyproduct",
+     "handcash_write","handcash"]
   end
   
   def getAdditionalConditionsOnLoad(ownerId) do

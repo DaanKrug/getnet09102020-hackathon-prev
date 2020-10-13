@@ -24,8 +24,6 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
    		this.sucessErrorMessages = {
 			200:  'Produto adicionado com sucesso.',
 			201:  'Produto alterado com sucesso.',
-			2010: 'Produto inativado com sucesso.',
-			2011: 'Produto ativado com sucesso.',
 			204:  'Produto exclu&iacute;do com sucesso.',
 			207:  'Produto restaurado com sucesso.',
 			208:  'Produto exclu&iacute;do [PERMANENTE] com sucesso.'
@@ -124,7 +122,7 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 	}
 	
 	setSelectedCategory(id){
-		this.selectedCategory = this.getFromArrayById(this.categories,id,null);;
+		this.selectedCategory = this.getFromArrayById(this.categories,id,null);
 	}
 	
 	loadCategories(){
@@ -195,5 +193,15 @@ export class ProductComponent extends BaseCrudFilterComponent implements OnInit,
 			this.dataForm.patchValue({a3_description: value});
 		}
    	} 
+	
+	toSupplys(id){
+		this.crudService.load(id).then(product => {
+			if(this.processObjectAndValidationResult(product,true)){
+				this.eventEmitterService.get('supplyproducts').emit({
+					object: product
+				});
+			}
+		});
+	}
 	
 }

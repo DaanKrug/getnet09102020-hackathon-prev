@@ -87,19 +87,14 @@
 						</div>
 					</td>
 				</tr>
+				<tr mdbTableCol>
+					<td class="text" [innerHtml]="Total" style="font-weight: bold;"></td>
+					<td class="number" 
+					    [innerHtml]="mathService.formatNumber(total,2,'.').replace('.',',')"></td>
+					<td class="actions"></td>
+				</tr>
 				<tr>
-					<td colspan="3" class="navigationBottom">
-						<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
-						                 [previousPageDisabled]="previousPageDisabled" 
-						                 [nextPageDisabled]="nextPageDisabled" 
-						                 [rowsPerPage]="rowsPerPage" 
-						                 [totalPages]="totalPages" 
-						                 [totalRows]="totalRows"
-						                 (previousPageEmitter)="previousPage()" 
-						                 (setPageEmitter)="setPage($event)"
-						                 (nextPageEmitter)="nextPage()">
-						</table-navigator>
-					</td>
+					<td colspan="3" class="navigationBottom"></td>
 				</tr>
 			</tbody>
 		</table>

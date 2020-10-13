@@ -1,0 +1,253 @@
+<ng-template [ngIf]="inPreview">
+	<div class="dataForm">
+		<div class="field">
+	   		<button class="btn btn-primary clickable formHeaderButton" 
+	   		        placement="right" 
+		   		    ngbTooltip="Voltar para lista de origem" 
+		   		    aria-label="Voltar para lista de origem"
+		   		    type="button" 
+		   		    (click)="backFromPreview()">
+		      		<i class="fas fa-arrow-left"></i>
+	       	</button>
+	   	</div>
+		<div class="field"><h5><span>Visualizando Lucro na Mão: {{selectedHandCash.a1_name}}</span></h5></div>
+		<div class="clear" style="margin-bottom: .4em;"></div>
+		<div id="selectedHandCashReportContainer"></div>
+		<div class="clear" style="margin-bottom: .4em;"></div>
+	</div>
+</ng-template>
+
+<ng-template [ngIf]="!inPreview">
+	<form-toolbar [title]="title" [editing]="editing" [searchForm]="searchForm" 
+				  (onSearchFormSubmitEmitter)="onSearchFormSubmit()" (listDataEmitter)="listData()"
+				  (listDataNoCacheEmitter)="listDataNoCache()"
+				  [auditingExclusions]="auditingExclusions"
+				  [enabledAuditList]="['admin_master','admin','system_auditor'].includes(logged.category)"
+		          (auditListEmitter)="auditList()" 
+		          (normalListEmitter)="normalList()"
+		          [disabledAddNew]="false"
+		          (addObjectEmitter)="addObject()">
+	</form-toolbar>
+	
+	<ng-template [ngIf]="editing" [ngIfElse]="listObjects">
+		<section aria-label="cadastro e alteracao de lucros na m&atilde;o" class="dataForm"> 
+			<form [formGroup]="dataForm" (ngSubmit)="onObjectFormSubmit()">   	
+				<div>	
+					<rich-input-text [formGroup]="dataForm" 
+					                 label="Identifica&ccedil;&atilde;o (*)" 
+					                 titlee="Identifica&ccedil;&atilde;o"
+					                 maxchars="250"
+					                 formControlName="a1_name" 
+					                 widthPerc="100" 
+					                 placeholderr="" 
+					                 ngDefaultControl>
+					</rich-input-text>
+					<div class="clear"></div>
+				</div> 
+				<div class="clear" style="margin-top: .4em;"></div>
+				<div class="fieldset">
+					<div *ngFor="let product of products; trackBy: trackById">
+						<div style="width: 100%;">
+							<label for="qtde_{{product.id}}">
+								Produto: {{ product.a2_name }}
+							</label>
+						</div>
+						<div class="field" 
+						     style="width: 49%;">
+						    <div>
+								<label for="qtde_{{product.id}}">
+									Quantidade Vendida
+								</label>
+							</div>
+							<input id="qtde_{{product.id}}" 
+							       type="number" 
+							       style="width: 100% !important; text-align: right;"
+				                   class="form-control" />
+						</div>
+						<div class="field" 
+						     style="width: 49%;">
+						    <div>
+								<label for="qtde_{{product.id}}">
+									Valor Unitário de Venda
+								</label>
+							</div>
+							<input id="price_{{product.id}}" 
+							       type="text" 
+							       style="width: 100% !important; text-align: right;"
+							       mask="0*,00" 
+							       [dropSpecialCharacters]="false"
+				                   class="form-control" />
+						</div>
+						
+						<div class="field" 
+						     style="width: 33%;">
+						    <div>
+								<label>
+									Custo Unitário de Produção: 
+									<span style="color: #f00;">{{ product.productCost }}</span>
+								</label>
+							</div>
+						</div>
+						
+						
+						<div class="clear" style="margin-bottom: .2em;"></div>
+					</div>
+					<div class="clear" style="margin-bottom: .5em;"></div>
+				</div>
+				<div>
+					<rich-checkbox widthPerc="100" 
+	         		               [breakBefore]="true"
+	         		               formControlName="a2_simulated" 
+	         		               label="Simulado"
+	         		               titlee="Simulado"
+	         		               ngDefaultControl >
+	         		</rich-checkbox>
+					<div class="clear"></div>
+				</div> 
+				<form-action [validationMessages]="validationMessages" 
+				             [processValidation]="processValidation"
+				             saveText="Calcular Lucro" 
+				             (cancelDataEmitter)="cancelData()">
+				</form-action>
+			</form>
+		</section>
+	</ng-template>
+	
+	<ng-template #listObjects>
+		<section aria-label="lista dos lucros na m&atilde;o">
+			<table class="table" *ngIf="objects as listOfObject" mdbTable> 
+				<thead class="black white-text">
+					<tr>
+						<th scope="col" style="width: auto;" 
+						    title="Identifica&ccedil;&atilde;o" 
+						    aria-label="Identifica&ccedil;&atilde;o">
+							Identifica&ccedil;&atilde;o
+						</th>
+						<th scope="col" style="width: 5rem;" 
+						    title="Simulado" 
+						    aria-label="Simulado">
+							Simulado
+						</th>
+						<th scope="col" style="width: 5em;" 
+						    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
+						<th scope="col" style="width: 7em;" 
+						    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr mdbTableCol *ngFor="let handcash of objects; trackBy: trackById">
+						<td class="text" [innerHtml]="handcash.a1_name"></td>
+						<td class="text" [innerHtml]="handcash.a2_simulatedLabel"></td>
+						<td class="actions">
+							<div class="buttons">
+								<button class="btn btn-primary clickable" 
+								        type="button" 
+										placement="left" 
+										ngbTooltip="Visualizar Cálculo de Lucro" 
+										aria-label="Visualizar Cálculo de Lucro"
+									    (click)="preview(handcash.id);"
+									    [disabled]="logged.id != handcash.ownerId">
+									<i class="fas fa-eye"></i>
+								</button>
+								<button class="btn btn-primary clickable" 
+								        type="button" 
+								        *ngIf="!auditingExclusions"
+										placement="left" 
+										ngbTooltip="Excluir" 
+										aria-label="Excluir"
+								        (click)="deleteObject(handcash.id,objectDeleteConfirmation);"
+								        [disabled]="logged.id != handcash.ownerId">
+									<i class="far fa-trash-alt"></i>
+								</button>
+								<button class="btn btn-primary clickable" 
+								        type="button" 
+								        *ngIf="auditingExclusions"
+										placement="left" 
+										ngbTooltip="Desfazer Exclusão" 
+										aria-label="Desfazer Exclusão"
+									    (click)="unDeleteObject(handcash.id,objectUnDeleteConfirmation);">
+									<i class="fas fa-undo-alt"></i>
+								</button>
+								<button class="btn btn-primary clickable" 
+								        type="button" 
+								        *ngIf="auditingExclusions"
+										placement="left" 
+										ngbTooltip="Excluir definitivamente" 
+										aria-label="Excluir definitivamente"
+								        (click)="deleteObject(handcash.id,objectDeleteConfirmation);">
+									<i class="far fa-trash-alt"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="navigationBottom">
+							<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
+							                 [previousPageDisabled]="previousPageDisabled" 
+							                 [nextPageDisabled]="nextPageDisabled" 
+							                 [rowsPerPage]="rowsPerPage" 
+							                 [totalPages]="totalPages" 
+							                 [totalRows]="totalRows"
+							                 (previousPageEmitter)="previousPage()" 
+							                 (setPageEmitter)="setPage($event)"
+							                 (nextPageEmitter)="nextPage()">
+							</table-navigator>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</ng-template>
+</ng-template>
+
+<ng-template #selectedObjectTemplate>
+	<tr>
+		<th scope="row" class="text" style="width: 12em;"
+ 		    title="Identifica&ccedil;&atilde;o"
+ 		    aria-label="Identifica&ccedil;&atilde;o">
+ 			Identifica&ccedil;&atilde;o:
+ 		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a1_name">
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" 
+		    class="text"
+		    title="Simulado"
+		    aria-label="Simulado">
+			Simulado:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a2_simulatedLabel">
+		</td>
+	</tr>
+</ng-template>
+
+<ng-template #objectDetail let-modal>
+	<delete-confirmation label="do Lucro Na M&atilde;o" 
+	                     [selectedObject]="selectedObject" 
+	                     info="true" [templateOutlet]="selectedObjectTemplate" 
+	                     (cancelDataEmitter)="showObject()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectDeleteConfirmation let-modal>
+	<delete-confirmation label="Lucro Na M&atilde;o" 
+	                     [selectedObject]="selectedObject" 
+	                     [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectUnDeleteConfirmation let-modal>
+	<delete-confirmation label="Lucro Na M&atilde;o" 
+	                     [selectedObject]="selectedObject" 
+	                     redo="true" [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmUnDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>

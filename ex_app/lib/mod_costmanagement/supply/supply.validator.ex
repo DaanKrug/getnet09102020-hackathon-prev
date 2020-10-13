@@ -17,4 +17,10 @@ defmodule ExApp.SupplyValidator do
     NumberUtil.toFloat(value)
   end
   
+  def getA3_un(mapParams,defaultValue \\ nil) do
+    value = StringUtil.coalesce(MapUtil.get(mapParams,:a3_un),defaultValue) |> String.downcase()
+    SanitizerUtil.sanitizeAll(value,false,true,10,"A-z")
+  end 
+  
+  
 end

@@ -102,10 +102,10 @@ export class ImageComponent extends BaseCrudFilterComponent implements OnInit, O
   
   preValidateToSaveUpdate(image): boolean{
 	  var link = image.link.trim().toLowerCase();
-	  if(!(link.indexOf('https://') == 0)){
+	  /*if(!(link.indexOf('https://') == 0)){
 		  var msg = 'Link deve apontar para um endereço HTTPS, iniciando com: <strong>https://</strong>';
 		  this.addValidationMessage(msg);
-	  }
+	  }*/
 	  if(!(super.validateFileType(link,'image'))){
 		  var msg = 'Link deve apontar para um arquivo do tipo Imagem: ';
 		  msg += ' <strong>.png .jpg .jpeg .gif ou .bmp</strong>.';

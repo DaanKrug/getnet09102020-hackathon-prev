@@ -1,0 +1,173 @@
+<form-toolbar [title]="title" [editing]="editing" [searchForm]="searchForm" 
+			  (onSearchFormSubmitEmitter)="onSearchFormSubmit()" (listDataEmitter)="listData()"
+			  (listDataNoCacheEmitter)="listDataNoCache()"
+			  [auditingExclusions]="auditingExclusions"
+			  [enabledAuditList]="['admin_master','admin','system_auditor'].includes(logged.category)"
+	          (auditListEmitter)="auditList()" (normalListEmitter)="normalList()"
+	          [disabledAddNew]="false"
+			  (addObjectEmitter)="addObject()"    
+			  [backToOrigin]="true" (backToOriginEmitter)="backToOrigin()">
+</form-toolbar>
+
+<ng-template [ngIf]="editing" [ngIfElse]="listObjects">
+	<section aria-label="cadastro e alteracao de insumos do produto" class="dataForm"> 
+		<form [formGroup]="dataForm" (ngSubmit)="onObjectFormSubmit()">   	
+			<div>	
+				<div class="field" 
+				     style="width: 59%;">
+					<rich-filter-selector id="selectOneSupply" 
+	                                      label="Insumo (*)" 
+	                                      emptyLabel="Selecione"
+				                          [selectedObject]="selectedSupply" 
+				                          [objects]="supplies" 
+				                          [onlySelect]="true"
+				                          (valueChangedEmitter)="setSelectedSupply($event)" >
+					</rich-filter-selector>
+				</div>
+   				<rich-input-text [formGroup]="dataForm" 
+				                 label="Quantidade (*)" 
+				                 titlee="Quantidade" 
+   				                 placeholderr="" 
+   				                 maskk="0*,0*" 
+   				                 maxchars="10" 
+   				                 minValue="0" 
+   				                 maxValue="9999999999" 
+   				                 forNumber="true"
+   				                 formControlName="a4_amount" 
+   				                 widthPerc="19" 
+   				                 ngDefaultControl>
+   				</rich-input-text> 
+   				<div class="field">
+   					{{ selectedSupply.a3_un }}
+   				</div>
+				<div class="clear"></div>
+			</div> 
+			<form-action [validationMessages]="validationMessages" 
+			             [processValidation]="processValidation" 
+			             (cancelDataEmitter)="cancelData()">
+			</form-action>
+		</form>
+	</section>
+</ng-template>
+
+<ng-template #listObjects>
+	<section aria-label="lista dos insumos do produto">
+		<table class="table" *ngIf="objects as listOfObject" mdbTable> 
+			<thead class="black white-text">
+				<tr>
+					<th scope="col" style="width: auto;" 
+					    title="Identifica&ccedil;&atilde;o" 
+					    aria-label="Identifica&ccedil;&atilde;o">
+						Identifica&ccedil;&atilde;o
+					</th>
+					<th scope="col" style="width: 7rem;" 
+					    title="Quantidade" 
+					    aria-label="Quantidade">
+						Qtde.
+					</th>
+					<th scope="col" style="width: 4rem;" 
+					    title="Unidade Medida" 
+					    aria-label="Unidade Medida">
+						U.M.
+					</th>
+					<th scope="col" style="width: 7em;" 
+					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
+					<th scope="col" style="width: 5em;" 
+					    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr mdbTableCol *ngFor="let supplyproduct of objects; trackBy: trackById">
+					<td class="text" [innerHtml]="supplyproduct.a2_supplyname"></td>
+					<td class="number" 
+					    [innerHtml]="supplyproduct.a4_amount.replace('.',',')"></td>
+					<td class="text" [innerHtml]="supplyproduct.a3_un"></td>
+					<td class="actions">
+						<div class="buttons">
+							<edit-delete-action [auditingExclusions]="auditingExclusions" 
+							                    [object]="supplyproduct" 
+							                    [logged]="logged"
+							                    [noAction]="false"  
+							                    [noEdit]="true"
+							                    [objectDetail]="objectDetail" 
+							                    (showObjectEmitter)="showObject($event)"
+							                    [objectDeleteConfirmation]="objectDeleteConfirmation" 
+							                    (deleteObjectEmitter)="deleteObject($event)"
+							                    [objectUnDeleteConfirmation]="objectUnDeleteConfirmation" 
+							                    (unDeleteObjectEmitter)="unDeleteObject($event)">
+							</edit-delete-action>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="navigationBottom">
+						<table-navigator [pages]="pages" 
+						                 [selectedPage]="selectedPage" 
+						                 [previousPageDisabled]="previousPageDisabled" 
+						                 [nextPageDisabled]="nextPageDisabled" 
+						                 [rowsPerPage]="rowsPerPage" 
+						                 [totalPages]="totalPages" 
+						                 [totalRows]="totalRows"
+						                 (previousPageEmitter)="previousPage()" 
+						                 (setPageEmitter)="setPage($event)"
+						                 (nextPageEmitter)="nextPage()">
+						</table-navigator>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</ng-template>
+
+<ng-template #selectedObjectTemplate>
+	<tr>
+		<th scope="row" 
+		    class="text"
+		    style="width: 9em;"
+		    title="Identifica&ccedil;&atilde;o"
+		    aria-label="Identifica&ccedil;&atilde;o">
+			Identifica&ccedil;&atilde;o:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a2_supplyname"></td>
+	</tr>
+	<tr>
+		<th scope="row" 
+		    class="text"
+		    title="Quantidade"
+		    aria-label="Quantidade">
+			Qtde.:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a4_amount">
+		</td>
+	</tr>
+</ng-template>
+
+<ng-template #objectDetail let-modal>
+	<delete-confirmation label="do Insumo Do Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     info="true" [templateOutlet]="selectedObjectTemplate" 
+	                     (cancelDataEmitter)="showObject()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectDeleteConfirmation let-modal>
+	<delete-confirmation label="Insumo Do Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectUnDeleteConfirmation let-modal>
+	<delete-confirmation label="Insumo Do Produto" 
+	                     [selectedObject]="selectedObject" 
+	                     redo="true" [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmUnDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>

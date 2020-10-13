@@ -9,6 +9,7 @@ defmodule ExApp.ProductHandler do
   alias ExApp.ProductService
   alias ExApp.ImageService
   alias ExApp.CcategoryproductService
+  alias ExApp.SupplyproductService
   
   
   def objectClassName() do
@@ -59,6 +60,7 @@ defmodule ExApp.ProductHandler do
   def validateToDelete(id,product) do
     cond do
       (!(id > 0) or nil == product) -> MessagesUtil.systemMessage(412)
+      (SupplyproductService.productIsIn(id)) -> MessagesUtil.systemMessage(100319)
       true -> MessagesUtil.systemMessage(205)
     end
   end

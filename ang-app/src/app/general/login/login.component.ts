@@ -224,7 +224,7 @@ export class LoginComponent extends BaseCrudFilterComponent implements OnInit, O
 		  this.eventEmitterService.get('home').emit({object: this.logged});
 	  });
   }
-	
+  
   private validateChangePasswordFormFields(){
 	  if(this.errorRequiredForm(this.changePasswordForm,'password')){
 		  this.addValidationMessage('Senha é requerida!');

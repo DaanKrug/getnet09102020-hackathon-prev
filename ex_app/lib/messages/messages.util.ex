@@ -1145,6 +1145,30 @@ defmodule ExApp.MessagesUtil do
                                  "Falha ao criar <strong>Insumo</strong>.")
       (messageCode == 100314) -> ReturnUtil.getValidationResult(100314,
                                  "Falha ao alterar <strong>Insumo</strong>.")
+      (messageCode == 100315) -> ReturnUtil.getValidationResult(100315,
+                                 "Falha ao criar <strong>Insumo do Produto</strong>.")
+      (messageCode == 100316) -> ReturnUtil.getValidationResult(100316,
+                                 "Falha ao alterar <strong>Insumo do Produto</strong>.")
+      (messageCode == 100317) -> ReturnUtil.getValidationResult(100317,
+                                 "<strong>Insumo</strong> informado não existe.")
+      (messageCode == 100318) -> ReturnUtil.getValidationResult(100318,
+                                 "<strong>Produto</strong> informado não existe.")
+      (messageCode == 100319) -> ReturnUtil.getValidationResult(100319,
+                                 """
+                                 <strong>Produto</strong> em questão não pode ser excluído 
+                                 pois está vinculado à insumo(s).
+                                 """)
+      (messageCode == 100320) -> ReturnUtil.getValidationResult(100320,
+                                 """
+                                 <strong>Insumo</strong> em questão não pode ser excluído
+                                 pois está vinculada à produto(s).
+                                 """)
+      (messageCode == 100321) -> ReturnUtil.getValidationResult(100321,
+                                 "<strong>Insumo</strong> já adicionado ao produto.")
+      (messageCode == 100322) -> ReturnUtil.getValidationResult(100322,
+                                 "Falha ao criar <strong>Lucro na Mão</strong>.")
+      (messageCode == 100323) -> ReturnUtil.getValidationResult(100323,
+                                 "Falha ao alterar <strong>Lucro na Mão</strong>.")
       true -> systemMessage(0)
     end
   end

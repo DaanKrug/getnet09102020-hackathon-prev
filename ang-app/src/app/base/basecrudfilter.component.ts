@@ -32,6 +32,8 @@ import { FileService } from '../management/file/file.service';
 import { ProductService } from '../management/product/product.service';
 import { FixedcostService } from '../management/fixedcost/fixedcost.service';
 import { SupplyService } from '../management/supply/supply.service';
+import { SupplyproductService } from '../management/supplyproduct/supplyproduct.service';
+import { HandcashService } from '../management/handcash/handcash.service';
 
 
 export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit, OnDestroy{
@@ -49,6 +51,8 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
     productService: ProductService;
 	fixedcostService: FixedcostService;
 	supplyService: SupplyService;
+    supplyproductService: SupplyproductService;
+	handcashService: HandcashService;
 
     modulesNames: string[];
     activatedServices: any[];
@@ -238,7 +242,14 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
         	this.supplyService = new SupplyService(this.http);
       	    this.injectServiceDependencies(this.supplyService);
         }
-        
+        if(toAactivateServices.includes('supplyproduct')){
+        	this.supplyproductService = new SupplyproductService(this.http);
+      	    this.injectServiceDependencies(this.supplyproductService);
+        }
+        if(toAactivateServices.includes('handcash')){
+        	this.handcashService = new HandcashService(this.http);
+      	    this.injectServiceDependencies(this.handcashService);
+        }
 		this.servicesInitialized = true;
 	}
 	

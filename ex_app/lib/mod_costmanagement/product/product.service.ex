@@ -45,7 +45,7 @@ defmodule ExApp.ProductService do
           a5_imagelink,
           a6_categoryid,
           a7_categoryname,
-          ownerId,created_at) values (?,?,?,?,?,?,?)
+          ownerId,created_at) values (?,?,?,?,?,?,?,?)
 	      """
     DAOService.insert(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false)])
   end

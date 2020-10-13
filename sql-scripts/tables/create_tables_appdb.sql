@@ -92,7 +92,7 @@ CREATE TABLE `product` (
      `a4_imageid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
      `a5_imagelink` text COLLATE utf8mb4_general_ci DEFAULT NULL,
      `a6_categoryid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-     `a7_categoryname` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL
+     `a7_categoryname` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL,
      `ownerId` bigint(20) UNSIGNED NOT NULL,
      `created_at` timestamp NULL DEFAULT NULL,
      `updated_at` timestamp NULL DEFAULT NULL,
@@ -127,6 +127,7 @@ CREATE TABLE `supply` (
      `id` bigint(20) UNSIGNED NOT NULL,
      `a1_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
      `a2_value` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0,
+     `a3_un` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
      `ownerId` bigint(20) UNSIGNED NOT NULL,
      `created_at` timestamp NULL DEFAULT NULL,
      `updated_at` timestamp NULL DEFAULT NULL,
@@ -140,3 +141,36 @@ ALTER TABLE `supply` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 
 
+CREATE TABLE `supplyproduct` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_supplyid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+     `a2_supplyname` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a3_productid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+     `a4_amount` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `supplyproduct` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `supplyproduct` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+
+
+CREATE TABLE `handcash` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_name` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a2_simulated` tinyint(1) NOT NULL DEFAULT 0,
+     `a3_reportdata` text COLLATE utf8mb4_general_ci NOT NULL,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `handcash` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `handcash` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

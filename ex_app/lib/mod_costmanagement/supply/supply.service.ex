@@ -3,14 +3,17 @@ defmodule ExApp.SupplyService do
   use ExApp.BaseServiceSecure
   alias ExApp.App.DAOService
   alias ExApp.DateUtil
+  alias ExApp.MapUtil
   alias ExApp.NumberUtil
   alias ExApp.ResultSetHandler
   alias ExApp.Supply
+  alias ExApp.SupplyproductService
+  
   
   def loadById(id) do
     sql = """
 	      select id, a1_name,
-          a2_value, ownerId from supply where id = ? limit 1
+          a2_value,a3_un, ownerId from supply where id = ? limit 1
 	      """
 	resultset = DAOService.load(sql,[id])
 	cond do
@@ -22,7 +25,7 @@ defmodule ExApp.SupplyService do
   def create(paramValues) do
     sql = """
           insert into supply(a1_name,
-          a2_value,ownerId,created_at) values (?,?,?,?)
+          a2_value,a3_un,ownerId,created_at) values (?,?,?,?,?)
 	      """
     DAOService.insert(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false)])
   end
@@ -30,13 +33,15 @@ defmodule ExApp.SupplyService do
   def update(id,paramValues) do
     sql = """
           update supply set a1_name = ?,
-          a2_value = ?, updated_at = ? where id = ?
+          a2_value = ?, 
+          a3_un = ?, 
+          updated_at = ? where id = ?
 	      """
     DAOService.update(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false),id])
   end
   
-  def updateDependencies(_id,_supply) do
-  
+  def updateDependencies(id,supply) do
+    SupplyproductService.updateBySupply(id,MapUtil.get(supply,:a1_name))
   end
   
   def loadAll(page,rows,conditions,deletedAt,_mapParams) do
@@ -50,6 +55,7 @@ defmodule ExApp.SupplyService do
     sql = """
           select id, a1_name,
           a2_value, 
+          a3_un,
           ownerId from supply 
           where #{deletedAt} #{conditions} 
           order by id asc
@@ -95,7 +101,8 @@ defmodule ExApp.SupplyService do
     Supply.new(NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,0)),
                ResultSetHandler.getColumnValue(resultset,row,1),
                NumberUtil.toFloat(ResultSetHandler.getColumnValue(resultset,row,2)),
-               NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,3)),
+               ResultSetHandler.getColumnValue(resultset,row,3),
+               NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,4)),
                total)
   end
   

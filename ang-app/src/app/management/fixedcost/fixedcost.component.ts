@@ -12,6 +12,8 @@ import { BaseCrudFilterComponent } from '../../base/basecrudfilter.component';
 })
 export class FixedcostComponent extends BaseCrudFilterComponent implements OnInit, OnDestroy{
 
+	total: number;
+	
 	ngOnInit() {
    		this.setInitializationServices(['fixedcost']);
    		this.crudService = this.fixedcostService;
@@ -37,8 +39,18 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 	afterNgOnInit(){
    		this.parameterName = 'a1_name|type:string';        
 	}
+	
+	afterListData(){
+		this.total = 0;
+		var size = this.objects.length;
+		for(var i = 0; i < size; i++){
+			this.total += this.objects[i].a2_value;
+		}
+		this.setProcessing(false);
+	}
 
 	ngOnDestroy(){    
+		this.total = null;
 		super.ngOnDestroy();
 	}
 
@@ -51,6 +63,8 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 	} 
 
 	getAdditionalConditions(): string{ 
+		this.selectedPage = -1;
+		this.rowsPerPage = -1;
 		return ' xoo ownerId = ' +  this.logged.id + ' ' + super.getAdditionalConditions();
 	} 
 	
