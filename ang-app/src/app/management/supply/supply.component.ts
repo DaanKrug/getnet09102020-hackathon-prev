@@ -33,6 +33,7 @@ export class SupplyComponent extends BaseCrudFilterComponent implements OnInit, 
 			a3_un: new FormControl('', [])
 		});    
 		this.units = [
+			{value: 'un' , label: 'Unidade'},
 			{value: 'dz' , label: 'Dúzia'},
 		    {value: 'm' , label: 'Metros'},
 		    {value: 'cm' , label: 'Centímetros'},

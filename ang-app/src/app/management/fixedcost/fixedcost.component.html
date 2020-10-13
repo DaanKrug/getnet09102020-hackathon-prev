@@ -32,7 +32,19 @@
    				                 maxValue="99999999" 
    				                 forNumber="true"
    				                 formControlName="a2_value" 
-   				                 widthPerc="29" 
+   				                 widthPerc="19" 
+   				                 ngDefaultControl>
+   				</rich-input-text> 
+   				<rich-input-text [formGroup]="dataForm" 
+   				                 [noRender]="type != 'variant'"
+				                 label="Quantidade (*)" 
+				                 titlee="Quantidade" 
+   				                 maxchars="9" 
+   				                 minValue="0" 
+   				                 maxValue="999999999" 
+   				                 forNumber="true"
+   				                 formControlName="a3_qtde" 
+   				                 widthPerc="19" 
    				                 ngDefaultControl>
    				</rich-input-text> 
 				<div class="clear"></div>

@@ -3,12 +3,12 @@
   "short_name": "Get Net 09 10 2020 App",
   "description": "Get Net 09 10 2020 App",
   "icons": [{
-    "src": "./getnet09102020/pwa-192x192.png",
+    "src": "https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/pwa-192x192.png",
     "sizes": "192x192",
     "type": "image/png",
     "purpose": "any maskable"
   },{
-    "src": "./getnet09102020/pwa-512x512.png",
+    "src": "https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/pwa-512x512.png",
     "sizes": "512x512",
     "type": "image/png",
     "purpose": "any maskable"

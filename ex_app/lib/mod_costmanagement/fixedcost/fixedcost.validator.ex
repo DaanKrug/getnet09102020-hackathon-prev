@@ -17,4 +17,10 @@ defmodule ExApp.FixedcostValidator do
     NumberUtil.toFloat(value)
   end
   
+  def getA3_qtde(mapParams,defaultValue \\ nil) do
+    value = NumberUtil.coalesce(MapUtil.get(mapParams,:a3_qtde),defaultValue)
+    value = SanitizerUtil.sanitizeAll(value,true,true,10,"0-9")
+    NumberUtil.toInteger(value)
+  end
+  
 end

@@ -10,7 +10,7 @@ defmodule ExApp.FixedcostService do
   def loadById(id) do
     sql = """
 	      select id, a1_name,
-          a2_value, ownerId from fixedcost where id = ? limit 1
+          a2_value,a3_qtde, ownerId from fixedcost where id = ? limit 1
 	      """
 	resultset = DAOService.load(sql,[id])
 	cond do
@@ -22,7 +22,7 @@ defmodule ExApp.FixedcostService do
   def create(paramValues) do
     sql = """
           insert into fixedcost(a1_name,
-          a2_value,ownerId,created_at) values (?,?,?,?)
+          a2_value,a3_qtde,ownerId,created_at) values (?,?,?,?,?)
 	      """
     DAOService.insert(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false)])
   end
@@ -30,7 +30,7 @@ defmodule ExApp.FixedcostService do
   def update(id,paramValues) do
     sql = """
           update fixedcost set a1_name = ?,
-          a2_value = ?, updated_at = ? where id = ?
+          a2_value = ?, a3_qtde = ?, updated_at = ? where id = ?
 	      """
     DAOService.update(sql,paramValues ++ [DateUtil.getNowToSql(0,false,false),id])
   end
@@ -50,6 +50,7 @@ defmodule ExApp.FixedcostService do
     sql = """
           select id, a1_name,
           a2_value, 
+          a3_qtde,
           ownerId from fixedcost 
           where #{deletedAt} #{conditions} 
           order by id asc
@@ -57,13 +58,13 @@ defmodule ExApp.FixedcostService do
           """
     resultset = DAOService.load(sql,[])
     cond do
-      (nil == resultset or resultset.num_rows == 0) -> [Fixedcost.new(0,nil,0,0,0)]
+      (nil == resultset or resultset.num_rows == 0) -> [Fixedcost.new(0,nil,0,0,0,0)]
       true -> parseResults(resultset,total,[],0) 
     end
   end
   
   def loadAllForPublic(_page,_rows,_conditions,_deletedAt,_mapParams) do
-    [Fixedcost.new(0,nil,0,0,0)]
+    [Fixedcost.new(0,nil,0,0,0,0)]
   end
   
   def delete(id) do
@@ -95,7 +96,8 @@ defmodule ExApp.FixedcostService do
     Fixedcost.new(NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,0)),
                   ResultSetHandler.getColumnValue(resultset,row,1),
                   NumberUtil.toFloat(ResultSetHandler.getColumnValue(resultset,row,2)),
-                  NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,3)),
+                  NumberUtil.toFloat(ResultSetHandler.getColumnValue(resultset,row,3)),
+                  NumberUtil.toInteger(ResultSetHandler.getColumnValue(resultset,row,4)),
                   total)
   end
   

@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "deployUrl": "../getnet09102020/ex_app/priv/static/angular/",
+            "deployUrl": "https://getnet09102020-cdn.s3-us-west-2.amazonaws.com/angular/",
             "aot": true,
             "outputPath": "../static_files/angular/",
             "index": "src/index.html",

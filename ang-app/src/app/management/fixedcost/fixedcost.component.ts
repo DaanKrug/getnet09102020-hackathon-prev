@@ -13,25 +13,27 @@ import { BaseCrudFilterComponent } from '../../base/basecrudfilter.component';
 export class FixedcostComponent extends BaseCrudFilterComponent implements OnInit, OnDestroy{
 
 	total: number;
+	type: string;
 	
 	ngOnInit() {
    		this.setInitializationServices(['fixedcost']);
    		this.crudService = this.fixedcostService;
+   		this.type = this.storageService.get()[0];
+   		var cu = this.type != 'variant' ? 'Fixo' : 'Variável';
    		this.sucessErrorMessages = {
-			200:  'Custo Fixo adicionado com sucesso.',
-			201:  'Custo Fixo alterado com sucesso.',
-			2010: 'Custo Fixo inativado com sucesso.',
-			2011: 'Custo Fixo ativado com sucesso.',
-			204:  'Custo Fixo exclu&iacute;do com sucesso.',
-			207:  'Custo Fixo restaurado com sucesso.',
-			208:  'Custo Fixo exclu&iacute;do [PERMANENTE] com sucesso.'
+			200:  'Custo ' + cu + ' adicionado com sucesso.',
+			201:  'Custo ' + cu + ' alterado com sucesso.',
+			204:  'Custo ' + cu + ' exclu&iacute;do com sucesso.',
+			207:  'Custo ' + cu + ' restaurado com sucesso.',
+			208:  'Custo ' + cu + ' exclu&iacute;do [PERMANENTE] com sucesso.'
 		}; 
-		this.listTitle = 'Custos Fixos';
-		this.addTitle = 'Adicionar Custo Fixo';
-		this.editTitle = 'Editar Custo Fixo';
+		this.listTitle = 'Custos ' + cu + 's';
+		this.addTitle = 'Adicionar Custo ' + cu;
+		this.editTitle = 'Editar Custo ' + cu;
 		this.dataForm = new FormGroup({
 			a1_name: new FormControl('', [Validators.required]),
-			a2_value: new FormControl('', [Validators.required])
+			a2_value: new FormControl('', [Validators.required]),
+			a3_qtde: new FormControl('', [Validators.required])
 		});    
 		super.ngOnInit();
 	}
@@ -50,6 +52,7 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 	}
 
 	ngOnDestroy(){    
+		this.type = null;
 		this.total = null;
 		super.ngOnDestroy();
 	}
@@ -58,14 +61,16 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
    		super.setObject(fixedcost);
 		this.dataForm.setValue({
 			a1_name: fixedcost.a1_name,
-			a2_value: ('' + this.mathService.formatNumber(fixedcost.a2_value,2,'.')).replace('.',',')
+			a2_value: ('' + this.mathService.formatNumber(fixedcost.a2_value,2,'.')).replace('.',','),
+			a3_qtde: fixedcost.a3_qtde
 		}); 
 	} 
 
 	getAdditionalConditions(): string{ 
 		this.selectedPage = -1;
 		this.rowsPerPage = -1;
-		return ' xoo ownerId = ' +  this.logged.id + ' ' + super.getAdditionalConditions();
+		var cond = (this.type == 'variant') ? ' xoo a3_qtde > 0 ' : ' xoo a3_qtde = 0 ';
+		return ' xoo ownerId = ' +  this.logged.id + ' ' + cond + ' ' + super.getAdditionalConditions();
 	} 
 	
 	prepareData(fixedcost){
@@ -77,6 +82,7 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 	prepareToSaveUpdate(fixedcost){
 		var value = ('' + this.mathService.formatNumber(fixedcost.a2_value,2,'.')).replace(',','.');
 		fixedcost.a2_value = parseFloat(value);
+		fixedcost.a3_qtde = (this.type == 'variant') ? fixedcost.a3_qtde : 0;
 		return fixedcost;
 	}
 
@@ -92,6 +98,9 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 		if(this.errorRequired('a2_value')){
 			this.addValidationMessage('Valor &eacute; requerido!');
 		}
+		if(this.type == 'variant' && this.errorRequired('a3_qtde')){
+			this.addValidationMessage('Quantidade &eacute; requerida!');
+		}
 		return !this.inValidationMsgs();
 	}
 
@@ -102,5 +111,10 @@ export class FixedcostComponent extends BaseCrudFilterComponent implements OnIni
 		if(target == 'a2_value'){
 			this.dataForm.patchValue({a2_value: value});
 		}
+		if(target == 'a3_qtde'){
+			this.dataForm.patchValue({a3_qtde: value});
+		}
    	} 
 }
+
+

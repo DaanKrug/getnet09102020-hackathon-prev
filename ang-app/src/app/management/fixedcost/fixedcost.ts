@@ -4,6 +4,7 @@ export class Fixedcost {
 		public conditions: string, 
 		public a1_name: string,
 		public a2_value: number,
+		public a3_qtde: number,
 		public a2_valueLabel: string,
 		public ownerId: number,
 		public _token: string,

@@ -104,7 +104,9 @@ ALTER TABLE `product` ADD PRIMARY KEY (`id`);
 ALTER TABLE `product` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 
-
+alter table fixedcost add column
+`a3_qtde` int(10) UNSIGNED NOT NULL DEFAULT 0
+after a2_value;
 
 CREATE TABLE `fixedcost` (
      `id` bigint(20) UNSIGNED NOT NULL,

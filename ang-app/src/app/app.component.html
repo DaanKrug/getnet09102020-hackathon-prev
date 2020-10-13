@@ -218,6 +218,12 @@
 								                      (clickEmitter)="fixedcostsView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
+								<rich-dropdown-button label="Custos Variáveis" 
+								                      [activated]="view == 'fixedcosts'" 
+								                      [noRender]="!fullButtonsManager"
+								                      (clickEmitter)="variantcostsView()"
+								                      (clickEmitter1)="drd2.close()">
+								</rich-dropdown-button>
 								<rich-dropdown-button label="Insumos" 
 								                      [activated]="view == 'supplys'" 
 								                      [noRender]="!fullButtonsManager"
@@ -360,6 +366,11 @@
 								</rich-menu-button>
 								<rich-menu-button label="Custos Fixos" 
 								                  (clickEmitter)="fixedcostsView()" 
+								                  [activated]="view == 'fixedcosts'" 
+								                  [noRender]="!fullButtonsManager">
+								</rich-menu-button>
+								<rich-menu-button label="Custos Variáveis" 
+								                  (clickEmitter)="variantcostsView()" 
 								                  [activated]="view == 'fixedcosts'" 
 								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
