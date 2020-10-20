@@ -54,43 +54,7 @@ defmodule ExApp.Enviroment.Env do
   end
   
   defp getEnvProd() do
-    ["APPDB_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_PORT=3306",
-	"APPDB_DATABASE=getnet09102020",
-	"APPDB_USERNAME=skaller",
-	"APPDB_PASSWORD=sk4LL3h*oN",
-	
-	"APPDB_LOG_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_LOG_PORT=3306",
-	"APPDB_LOG_DATABASE=getnet09102020_log",
-	"APPDB_LOG_USERNAME=skaller",
-	"APPDB_LOG_PASSWORD=sk4LL3h*oN",
-	
-	"APPDB_SESSION_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_SESSION_PORT=3306",
-	"APPDB_SESSION_DATABASE=getnet09102020_session",
-	"APPDB_SESSION_USERNAME=skaller",
-	"APPDB_SESSION_PASSWORD=sk4LL3h*oN",
-	
-	"APPDB_BILLINGCONTROL_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_BILLINGCONTROL_PORT=3306",
-	"APPDB_BILLINGCONTROL_DATABASE=getnet09102020_billingcontrol",
-	"APPDB_BILLINGCONTROL_USERNAME=skaller",
-	"APPDB_BILLINGCONTROL_PASSWORD=sk4LL3h*oN",
-	
-	"APPDB_QUEUE_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_QUEUE_PORT=3306",
-	"APPDB_QUEUE_DATABASE=getnet09102020_queue",
-	"APPDB_QUEUE_USERNAME=skaller",
-	"APPDB_QUEUE_PASSWORD=sk4LL3h*oN",
-	
-	"APPDB_CONFIG_HOST=skallerten-app-db.c0lntx0gi9gk.us-west-2.rds.amazonaws.com",
-	"APPDB_CONFIG_PORT=3306",
-	"APPDB_CONFIG_DATABASE=getnet09102020_config",
-	"APPDB_CONFIG_USERNAME=skaller",
-	"APPDB_CONFIG_PASSWORD=sk4LL3h*oN"
-	
-	]
+    []
   end
 
 end
